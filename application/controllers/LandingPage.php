@@ -227,59 +227,64 @@ class landingPage extends CI_Controller {
 				'nohp' => $nohp,
 				'password' => $password,
 				'username' => $email,
-				'status' => 0,
+				'status' => 1,
 				'is_deleted' => 0,
 			);
 
 			// input data ke database
 			$id = $this->LandingPageModel->registerPeserta($data);
-			$encrypted_id = md5($id);
+			if ($id) {
+				echo "<script>alert('Berhasil melakukan registrasi')</script>";
+			    redirect('register', 'refresh');
+			   	die();
+			}
+			// $encrypted_id = md5($id);
 
-			$this->load->library('PHPMailer');
-            $this->load->library('SMTP');
+			// $this->load->library('PHPMailer');
+   //          $this->load->library('SMTP');
 
-            $email_admin = 'panitiaid92@gmail.com';
-            $nama_admin = 'noreply-Panitia';
-            $password_admin = 'p4n1t141d';
+   //          $email_admin = 'panitiaid92@gmail.com';
+   //          $nama_admin = 'noreply-Panitia';
+   //          $password_admin = 'p4n1t141d';
 
-            $mail = new PHPMailer();
-            $mail->isSMTP();  
-            $mail->SMTPKeepAlive = true;
-            $mail->Charset  = 'UTF-8';
-            $mail->IsHTML(true);
-            // $mail->SMTPDebug = 1;
-            $mail->SMTPAuth = true;
-            $mail->Host = 'smtp.gmail.com'; 
-            $mail->Port = 465;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Username = $email_admin;
-            $mail->Password = $password_admin;
-            $mail->Mailer   = 'smtp';
-            $mail->WordWrap = 100;       
+   //          $mail = new PHPMailer();
+   //          $mail->isSMTP();  
+   //          $mail->SMTPKeepAlive = true;
+   //          $mail->Charset  = 'UTF-8';
+   //          $mail->IsHTML(true);
+   //          // $mail->SMTPDebug = 1;
+   //          $mail->SMTPAuth = true;
+   //          $mail->Host = 'smtp.gmail.com'; 
+   //          $mail->Port = 465;
+   //          $mail->SMTPSecure = 'ssl';
+   //          $mail->Username = $email_admin;
+   //          $mail->Password = $password_admin;
+   //          $mail->Mailer   = 'smtp';
+   //          $mail->WordWrap = 100;       
             
-            $mail->setFrom($email_admin);
-            $mail->FromName = $nama_admin;
-            $mail->addAddress($email);
-            $mail->Subject          = 'Verifikasi Akun Peserta Panitia.ID '.$nama;
-            // $mail_data['subject']   = $getmspencakerdata->NamaPencaker;
-            // $mail_data['induk']     = $getmspencakerdata->NomorIndukPencaker;
-            // $mail_data['username']  = $getmsuserdata->Username;
-            // $mail_data['password']  = $getmsuserdata->Password;
-            // $mail_data['lowongan']  = $lowonganhasil;
-            $message = "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini\n".
-		      site_url("register/verificationPeserta/$encrypted_id");
-            $mail->Body = $message;
-            if ($mail->send()) {
-               echo "<script>alert('Berhasil melakukan registrasi, silahkan cek email kamu.')</script>";
-		    	redirect('login', 'refresh');
-		    	die();
-           	} else {
-           	   // echo 'Message could not be sent.';
-           	   // echo 'Mailer Error: ' . $mail->ErrorInfo;
-           	   echo "<script>alert('Berhasil melakukan registrasi, namun gagal mengirim verifikasi email.')</script>";
-		    	redirect('register', 'refresh');
-		    	die();
-            }
+   //          $mail->setFrom($email_admin);
+   //          $mail->FromName = $nama_admin;
+   //          $mail->addAddress($email);
+   //          $mail->Subject          = 'Verifikasi Akun Peserta Panitia.ID '.$nama;
+   //          // $mail_data['subject']   = $getmspencakerdata->NamaPencaker;
+   //          // $mail_data['induk']     = $getmspencakerdata->NomorIndukPencaker;
+   //          // $mail_data['username']  = $getmsuserdata->Username;
+   //          // $mail_data['password']  = $getmsuserdata->Password;
+   //          // $mail_data['lowongan']  = $lowonganhasil;
+   //          $message = "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini\n".
+		 //      site_url("register/verificationPeserta/$encrypted_id");
+   //          $mail->Body = $message;
+   //          if ($mail->send()) {
+   //             echo "<script>alert('Berhasil melakukan registrasi, silahkan cek email kamu.')</script>";
+		 //    	redirect('login', 'refresh');
+		 //    	die();
+   //         	} else {
+   //         	   // echo 'Message could not be sent.';
+   //         	   // echo 'Mailer Error: ' . $mail->ErrorInfo;
+   //         		echo "<script>alert('Berhasil melakukan registrasi, namun gagal mengirim verifikasi email.')</script>";
+		 //    	redirect('register', 'refresh');
+		 //   		die();
+   //          }
 
 			// //enkripsi id
 	  //   	$encrypted_id = md5($id);
@@ -347,59 +352,64 @@ class landingPage extends CI_Controller {
 				'alamat' => $alamat,
 				'password' => $password,
 				'username' => $email,
-				'status' => 0,
+				'status' => 1,
 				'is_deleted' => 0,
 			);
 
 			// input data ke database
 			$id = $this->LandingPageModel->registerEo($data);
-			$encrypted_id = md5($id);
+			if ($id) {
+				echo "<script>alert('Berhasil melakukan registrasi')</script>";
+			    redirect('register', 'refresh');
+			   	die();
+			}
+			// $encrypted_id = md5($id);
 
-			$this->load->library('PHPMailer');
-            $this->load->library('SMTP');
+			// $this->load->library('PHPMailer');
+   //          $this->load->library('SMTP');
 
-            $email_admin = 'panitiaid92@gmail.com';
-            $nama_admin = 'noreply-Panitia';
-            $password_admin = 'p4n1t141d';
+   //          $email_admin = 'panitiaid92@gmail.com';
+   //          $nama_admin = 'noreply-Panitia';
+   //          $password_admin = 'p4n1t141d';
 
-            $mail = new PHPMailer();
-            $mail->isSMTP();  
-            $mail->SMTPKeepAlive = true;
-            $mail->Charset  = 'UTF-8';
-            $mail->IsHTML(true);
-            // $mail->SMTPDebug = 1;
-            $mail->SMTPAuth = true;
-            $mail->Host = 'smtp.gmail.com'; 
-            $mail->Port = 465;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Username = $email_admin;
-            $mail->Password = $password_admin;
-            $mail->Mailer   = 'smtp';
-            $mail->WordWrap = 100;       
+   //          $mail = new PHPMailer();
+   //          $mail->isSMTP();  
+   //          $mail->SMTPKeepAlive = true;
+   //          $mail->Charset  = 'UTF-8';
+   //          $mail->IsHTML(true);
+   //          // $mail->SMTPDebug = 1;
+   //          $mail->SMTPAuth = true;
+   //          $mail->Host = 'smtp.gmail.com'; 
+   //          $mail->Port = 465;
+   //          $mail->SMTPSecure = 'ssl';
+   //          $mail->Username = $email_admin;
+   //          $mail->Password = $password_admin;
+   //          $mail->Mailer   = 'smtp';
+   //          $mail->WordWrap = 100;       
             
-            $mail->setFrom($email_admin);
-            $mail->FromName = $nama_admin;
-            $mail->addAddress($email);
-            $mail->Subject          = 'Verifikasi Akun EO Panitia.ID '.$nama_eo;
-            // $mail_data['subject']   = $getmspencakerdata->NamaPencaker;
-            // $mail_data['induk']     = $getmspencakerdata->NomorIndukPencaker;
-            // $mail_data['username']  = $getmsuserdata->Username;
-            // $mail_data['password']  = $getmsuserdata->Password;
-            // $mail_data['lowongan']  = $lowonganhasil;
-            $message = "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini\n".
-		      site_url("register/verificationEo/$encrypted_id");
-            $mail->Body = $message;
-            if ($mail->send()) {
-               echo "<script>alert('Berhasil melakukan registrasi, silahkan cek email kamu.')</script>";
-		    	redirect('login', 'refresh');
-		    	die();
-           	} else {
-           	   // echo 'Message could not be sent.';
-           	   // echo 'Mailer Error: ' . $mail->ErrorInfo;
-           	   echo "<script>alert('Berhasil melakukan registrasi, namun gagal mengirim verifikasi email.')</script>";
-		    	redirect('register', 'refresh');
-		    	die();
-            }
+   //          $mail->setFrom($email_admin);
+   //          $mail->FromName = $nama_admin;
+   //          $mail->addAddress($email);
+   //          $mail->Subject          = 'Verifikasi Akun EO Panitia.ID '.$nama_eo;
+   //          // $mail_data['subject']   = $getmspencakerdata->NamaPencaker;
+   //          // $mail_data['induk']     = $getmspencakerdata->NomorIndukPencaker;
+   //          // $mail_data['username']  = $getmsuserdata->Username;
+   //          // $mail_data['password']  = $getmsuserdata->Password;
+   //          // $mail_data['lowongan']  = $lowonganhasil;
+   //          $message = "terimakasih telah melakukan registrasi, untuk memverifikasi silahkan klik tautan dibawah ini\n".
+		 //      site_url("register/verificationEo/$encrypted_id");
+   //          $mail->Body = $message;
+   //          if ($mail->send()) {
+   //             echo "<script>alert('Berhasil melakukan registrasi, silahkan cek email kamu.')</script>";
+		 //    	redirect('login', 'refresh');
+		 //    	die();
+   //         	} else {
+   //         	   // echo 'Message could not be sent.';
+   //         	   // echo 'Mailer Error: ' . $mail->ErrorInfo;
+   //         	   echo "<script>alert('Berhasil melakukan registrasi, namun gagal mengirim verifikasi email.')</script>";
+		 //    	redirect('register', 'refresh');
+		 //    	die();
+   //          }
 
 			// //enkripsi id
 	  //   	$encrypted_id = md5($id);
