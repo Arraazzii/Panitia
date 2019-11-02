@@ -1,0 +1,292 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+   
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+}
+
+.bg-flat-b {
+    background: #cee6ff;
+}
+
+.search {
+    border-radius: 100px;
+}
+
+.navbar-light .navbar-nav .active a{
+    color: #74b9ff !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+    color: #74b9ff !important;
+}
+
+.navbar-light .navbar-brand {
+    background: -webkit-linear-gradient(#7F7FD5, #86A8E7, #91EAE4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.line {
+    width: 50px;
+    height: 5px;
+    background: #74b9ff;
+    border:none;
+    margin-top:-5px;
+    border-radius: 100px;
+}
+
+.btn-soft-b {
+    background: #74b9ff;
+}
+
+.btn-done {
+    background: #00b894;
+}
+
+.rounded-100 {
+    border-radius: 100px;
+}
+
+.hovereffect {
+    width:100%;
+    height:100%;
+    float:left;
+    overflow:hidden;
+    position:relative;
+    text-align:center;
+    cursor:default;
+    }
+    
+    .hovereffect .overlay {
+    width:100%;
+    height:100%;
+    position:absolute;
+    overflow:hidden;
+    top:0;
+    left:0;
+    opacity:0;
+    background-color:rgba(0,0,0,0.5);
+    -webkit-transition:all .4s ease-in-out;
+    transition:all .4s ease-in-out
+    }
+    
+    .hovereffect img {
+    display:block;
+    position:relative;
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+    }
+    
+    .hovereffect h2 {
+    text-transform:uppercase;
+    color:#fff;
+    text-align:center;
+    position:relative;
+    font-size:17px;
+    background:rgba(0,0,0,0.6);
+    -webkit-transform:translatey(-100px);
+    -ms-transform:translatey(-100px);
+    transform:translatey(-100px);
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    padding:10px;
+    }
+    
+    .hovereffect a.info {
+    text-decoration:none;
+    display:inline-block;
+    text-transform:uppercase;
+    color:#fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    margin:50px 0 0;
+    padding:7px 14px;
+    }
+    
+    .hovereffect a.info:hover {
+    box-shadow:0 0 5px #fff;
+    }
+    
+    .hovereffect:hover img {
+    -ms-transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
+    }
+    
+    .hovereffect:hover .overlay {
+    opacity:1;
+    filter:alpha(opacity=100);
+    }
+    
+    .hovereffect:hover h2,.hovereffect:hover a.info {
+    opacity:1;
+    filter:alpha(opacity=100);
+    -ms-transform:translatey(0);
+    -webkit-transform:translatey(0);
+    transform:translatey(0);
+    }
+    
+    .hovereffect:hover a.info {
+    -webkit-transition-delay:.2s;
+    transition-delay:.2s;
+    }
+
+.patern {
+    height: 100px;
+    background: #cee6ff7a;
+}
+
+.image-flayer {
+    margin-top: -60px;
+}
+
+/* animation */
+@media (min-width: 992px) {
+    .animate {
+      animation-duration: 0.5s;
+      -webkit-animation-duration: 0.5s;
+      animation-fill-mode: both;
+      -webkit-animation-fill-mode: both;
+    }
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    100% {
+      transform:translateY(0rem);
+      opacity: 1;
+    }
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+  
+  @-webkit-keyframes slideIn {
+    0% {
+      -webkit-transform: transform;
+      -webkit-opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      -webkit-opacity: 1;
+    }
+    0% {
+      -webkit-transform: translateY(1rem);
+      -webkit-opacity: 0;
+    }
+  }
+  
+  .slideIn {
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+  }
+
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    width: 200px !important;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100px;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;   
+    cursor: inherit;
+    display: block;
+}
+
+/* dropdown large */
+/* adds some margin below the link sets  */
+.navbar .dropdown-menu-large div[class*="col"] {
+    margin-bottom:1rem;
+ }
+ 
+ .navbar .dropdown-menu-large {
+   border:none;
+   background-color:#fff!important;
+ }
+ 
+ /* breakpoint and up - mega dropdown styles */
+ @media screen and (min-width: 992px) {
+   
+   /* remove the padding from the navbar so the dropdown hover state is not broken */
+ .navbar {
+   padding-top:0px;
+   padding-bottom:0px;
+ }
+ 
+ /* remove the padding from the nav-item and add some margin to give some breathing room on hovers */
+ .navbar .nav-item {
+   padding:.5rem .5rem;
+   margin:0 .25rem;
+ }
+ 
+ /* makes the dropdown full width  */
+ .navbar .dropdown-large {position:static;}
+ 
+ .navbar .dropdown-menu-large {
+   width:100%;
+   left:0;
+   right:0;
+ /*  height of nav-item  */
+   top:45px;
+ }
+   
+   /* shows the dropdown menu on hover */
+ .navbar .dropdown:hover .dropdown-menu-large, .navbar .dropdown .dropdown-menu-large:hover {
+   display:block!important;
+ }
+   
+   .navbar .dropdown-menu-large {
+     border: 1px solid rgba(0,0,0,.15);
+     background-color: #fff;
+   }
+
+  @media screen and (min-width: 768px) {
+    .img-ads img {
+        width: 50% !important;
+    }
+  }
+
+
+/* mobile */  
+
+@media screen and (min-width: 576px) {
+  .img-ads img {
+      width: 100% !important;
+  }
+}
+
+@media print {
+    table, table tr, table td {
+        border-top: #000 solid 1px;
+        border-bottom: #000 solid 1px;
+        border-left: #000 solid 1px;
+        border-right: #000 solid 1px;
+    }
+} 
+
+table, table tr, table td {
+    border-top: #000 solid 1px;
+    border-bottom: #000 solid 1px;
+    border-left: #000 solid 1px;
+    border-right: #000 solid 1px;
+}
