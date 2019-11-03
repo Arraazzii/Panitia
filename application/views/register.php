@@ -29,6 +29,12 @@
             <h1>Register</h1>
         </div>
     </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
 

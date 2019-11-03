@@ -28,6 +28,12 @@
             <a href="<?= site_url('event_organizer/add_events') ?>" class="btn rounded-100 btn-primary btn-soft-b float-sm-right"><i class="mdi mdi-plus"></i> Tambah Event </a>
         </div>
     </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
 

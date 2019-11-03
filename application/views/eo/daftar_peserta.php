@@ -24,9 +24,15 @@
     
     <div class="patern py-3">
         <div class="container">
-            <h1>Name Event</h1>
+            <h1><?= $detail->JUDUL_ACARA ?></h1>
         </div>
     </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
 

@@ -22,6 +22,12 @@
         include 'global/_navbar_panel.php';
     ?>
     <!-- end navbar -->
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
     <!-- slider -->

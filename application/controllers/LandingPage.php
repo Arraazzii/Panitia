@@ -155,9 +155,8 @@ class landingPage extends CI_Controller {
              );
         	$checkEo = $this->LandingPageModel->checkEo($dataEo);
         	if ($checkEo == FALSE) {
-		    	echo "<script>alert('Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.')</script>";
-		    	redirect('login', 'refresh');
-		    	die();
+		    	$this->session->set_flashdata('danger', 'Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.');
+		    	redirect(site_url('login'),'refresh');
 	        } else {
 	        	$user = array(
         			'id_eo' => $checkEo->ID_EO,
@@ -166,8 +165,9 @@ class landingPage extends CI_Controller {
 	        		'nama_cp' => $checkEo->NAMA_CP,
 	        		'email' => $checkEo->EMAIL
 	        	);
-	        $this->session->set_userdata($user);
-	        redirect(site_url('event_organizer/dashboard'));
+	        	$this->session->set_userdata($user);
+		    	redirect(site_url('event_organizer/dashboard'),'refresh');
+
 	        }
 	        
 
@@ -179,9 +179,8 @@ class landingPage extends CI_Controller {
              );
         	$checkPeserta = $this->LandingPageModel->checkPeserta($data); 
         	if ($checkPeserta == FALSE) {
-        		echo "<script>alert('Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.')</script>";
-		    	redirect('login', 'refresh');
-		    	die();
+		    	$this->session->set_flashdata('danger', 'Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.');
+		    	redirect(site_url('login'),'refresh');
         	} else {
         		$user = array(
         			'id_peserta' => $checkPeserta->ID_PESERTA,
@@ -190,8 +189,8 @@ class landingPage extends CI_Controller {
         			'email' => $checkPeserta->EMAIL,
 	        		'status' => 1
         		);
-        	$this->session->set_userdata($user);
-        	redirect(site_url('peserta/dashboard') );        
+        		$this->session->set_userdata($user);
+		    	redirect(site_url('peserta/dashboard'),'refresh');       
         	}
 
         }
@@ -234,9 +233,8 @@ class landingPage extends CI_Controller {
 			// input data ke database
 			$id = $this->LandingPageModel->registerPeserta($data);
 			if ($id) {
-				echo "<script>alert('Berhasil melakukan registrasi')</script>";
-			    redirect('register', 'refresh');
-			   	die();
+		    	$this->session->set_flashdata('success', 'Berhasil melakukan registrasi.');
+		    	redirect(site_url('register'),'refresh');
 			}
 			// $encrypted_id = md5($id);
 
@@ -359,9 +357,8 @@ class landingPage extends CI_Controller {
 			// input data ke database
 			$id = $this->LandingPageModel->registerEo($data);
 			if ($id) {
-				echo "<script>alert('Berhasil melakukan registrasi')</script>";
-			    redirect('register', 'refresh');
-			   	die();
+		    	$this->session->set_flashdata('success', 'Berhasil melakukan registrasi.');
+		    	redirect(site_url('register'),'refresh');
 			}
 			// $encrypted_id = md5($id);
 
@@ -453,17 +450,15 @@ class landingPage extends CI_Controller {
 	public function verificationPeserta($key)
 	{
 		$this->LandingPageModel->changeActiveStatePeserta($key);
-		echo "<script>alert('Selamat kamu telah memverifikasi akun kamu.')</script>";
-		redirect('login', 'refresh');
-		die();
+		$this->session->set_flashdata('success', 'Selamat kamu telah memverifikasi akun kamu.');
+		redirect(site_url('login'),'refresh');
 	}
 
 	public function verificationEo($key)
 	{
 		$this->LandingPageModel->changeActiveStateEo($key);
-		echo "<script>alert('Selamat kamu telah memverifikasi akun kamu.')</script>";
-		redirect('login', 'refresh');
-		die();
+		$this->session->set_flashdata('success', 'Selamat kamu telah memverifikasi akun kamu.');
+		redirect(site_url('login'),'refresh');
 	}
 
 	public function logoutPeserta()
@@ -482,9 +477,8 @@ class landingPage extends CI_Controller {
 	{
 		if ($this->input->post('pass') == 'peserta') {
 			if (empty($this->session->userdata('id_peserta'))) {
-				echo "<script>alert('Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.')</script>";
-			    redirect('login', 'refresh');
-			    die();
+				$this->session->set_flashdata('danger', 'Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.');
+				redirect(site_url('login'),'refresh');
 			}
 
 			$pw_lama = md5($this->input->post('pw_lama'));
@@ -498,19 +492,16 @@ class landingPage extends CI_Controller {
 			$checkPw = $this->LandingPageModel->CheckPw($pw_lama, $id);
 			if ($checkPw) {
 				$updatePw = $this->LandingPageModel->UpdatePw($data, $id_peserta);
-				echo "<script>alert('Password anda telah diperbarui.')</script>";
-				redirect('peserta/profile', 'refresh');
-			    die();
+				$this->session->set_flashdata('success', 'Password anda telah diperbarui.');
+				redirect(site_url('peserta/profile'),'refresh');
 			} else {
-				echo "<script>alert('Password Lama yang anda masukkan salah.')</script>";
-			    redirect('peserta/profile', 'refresh');
-			    die();
+				$this->session->set_flashdata('danger', 'Password Lama yang anda masukkan salah.');
+				redirect(site_url('peserta/profile'),'refresh');
 			}
 		} else {
 			if (empty($this->session->userdata('id_eo'))) {
-				echo "<script>alert('Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.')</script>";
-			    redirect('login', 'refresh');
-			    die();
+				$this->session->set_flashdata('danger', 'Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.');
+				redirect(site_url('login'),'refresh');
 			} 
 
 			$pw_lama = md5($this->input->post('pw_lama'));
@@ -524,13 +515,11 @@ class landingPage extends CI_Controller {
 			$checkPw = $this->LandingPageModel->CheckPw($pw_lama, $id);
 			if ($checkPw) {
 				$updatePw = $this->LandingPageModel->UpdatePw($data, $id);
-				echo "<script>alert('Password anda telah diperbarui.')</script>";
-				redirect('event_organizer/profile', 'refresh');
-			    die();
+				$this->session->set_flashdata('success', 'Password anda telah diperbarui.');
+				redirect(site_url('event_organizer/profile'),'refresh');
 			} else {
-				echo "<script>alert('Password Lama yang anda masukkan salah.')</script>";
-			    redirect('event_organizer/profile', 'refresh');
-			    die();
+				$this->session->set_flashdata('danger', 'Password Lama yang anda masukkan salah.');
+				redirect(site_url('event_organizer/profile'),'refresh');
 			}
 		}
 	}

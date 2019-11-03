@@ -15,9 +15,8 @@ class Event extends CI_Controller {
 	public function events()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    //set params
 	    $params = array();
@@ -73,9 +72,8 @@ class Event extends CI_Controller {
 	public function tambah_events()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $data['minat'] = $this->EventModel->Minat();
 		$this->load->view('eo/tambah_event', $data);
@@ -163,13 +161,11 @@ class Event extends CI_Controller {
 	    );
 	    $query = $this->EventModel->tambahEvents($data);
 	    if($query == TRUE){
-	        echo "<script>alert('Berhasil Mengupload Events, Silahkan Aktifkan Terlebih dahulu.')</script>";
-			redirect('event_organizer/events', 'refresh');
-			die();
+		   	$this->session->set_flashdata('success', 'Berhasil Mengupload Events, Silahkan Aktifkan Terlebih dahulu.');
+		    redirect(site_url('event_organizer/events'),'refresh');
 	    }else{
-	        echo "<script>alert('Event gagal di Upload.')</script>";
-			redirect('event_organizer/add_events', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Event gagal di Upload.');
+		    redirect(site_url('event_organizer/add_events'),'refresh');
 	    }
 	}
 
@@ -185,9 +181,8 @@ class Event extends CI_Controller {
     public function editEvent($kode_event)
     {
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $data['detail'] = $this->EventModel->detailEvent($kode_event);
 	    $data['minat'] = $this->EventModel->Minat();
@@ -254,13 +249,11 @@ class Event extends CI_Controller {
 
 	    $query = $this->EventModel->editEvents($data, $kode_event);
 	    if($query == TRUE){
-	        echo "<script>alert('Berhasil Mengupdate Events.')</script>";
-			redirect('event_organizer/events', 'refresh');
-			die();
+		   	$this->session->set_flashdata('success', 'Berhasil Mengupdate Events.');
+		    redirect(site_url('event_organizer/events'),'refresh');
 	    }else{
-	        echo "<script>alert('Event gagal di Update.')</script>";
-			redirect('event_organizer/edit_event/'.$kode_event, 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Event gagal di Update.');
+		    redirect(site_url('event_organizer/edit_event/'.$kode_event), 'refresh');
 	    }
     }
 

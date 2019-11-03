@@ -18,9 +18,8 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$data['count_peserta'] = $this->DashboardModel->CountPeserta();
 		$data['count_myevents'] = $this->DashboardModel->CountMyEvents();
@@ -32,9 +31,8 @@ class Dashboard extends CI_Controller {
 	public function profile()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $var['profile'] = $this->DashboardModel->profile();
 		$this->load->view('eo/profile', $var);
@@ -43,11 +41,11 @@ class Dashboard extends CI_Controller {
 	public function DaftarPeserta($kode_events)
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$var['kode'] = $kode_events;
+	    $var['detail'] = $this->EventModel->detailEvent($kode_events);
 		$this->load->view('eo/daftar_peserta', $var);
 	}
 
@@ -84,9 +82,8 @@ class Dashboard extends CI_Controller {
 	public function pembayaran($kode_events)
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$var['kode'] = $kode_events;
 	    $var['detail'] = $this->DaftarPembayaranModel->detailPembayaran($kode_events);
@@ -144,9 +141,8 @@ class Dashboard extends CI_Controller {
 	public function invoice()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$this->load->view('eo/invoice');
 	}
@@ -196,9 +192,8 @@ class Dashboard extends CI_Controller {
 	public function tambah_invoice()
 	{
 		if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $var['event'] = $this->DashboardModel->MyEvent();
 		$this->load->view('eo/tambah_invoice', $var);
@@ -211,9 +206,8 @@ class Dashboard extends CI_Controller {
 	    $config['max_size'] = 0;
 	    $this->load->library('upload', $config);
 	    if (!$this->upload->do_upload('invoice')){
-	    	echo "<script>alert('Gagal Upload Invoice.')</script>";
-			redirect('event_organizer/add_invoice', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Gagal Upload Invoice.');
+		    redirect(site_url('event_organizer/add_invoice'),'refresh');
 	    }else{
 	        $_dataInvoice = array('upload_invoice' => $this->upload->data());
 	        $data = array(
@@ -228,13 +222,11 @@ class Dashboard extends CI_Controller {
 			);
 	        $query = $this->DashboardModel->tambahInvoice($data);
 	        if($query == TRUE){
-	        	echo "<script>alert('Berhasil Mengupload Invoice.')</script>";
-				redirect('event_organizer/invoice', 'refresh');
-				die();
+		   		$this->session->set_flashdata('success', 'Berhasil Mengupload Invoice.');
+		    	redirect(site_url('event_organizer/invoice'),'refresh');
 	        }else{
-	            echo "<script>alert('Invoice gagal di Upload.')</script>";
-				redirect('event_organizer/add_invoice', 'refresh');
-				die();
+		   		$this->session->set_flashdata('danger', 'Invoice gagal di Upload.');
+		    	redirect(site_url('event_organizer/add_invoice'),'refresh');
 	        }
 	    }
 	}
@@ -242,9 +234,8 @@ class Dashboard extends CI_Controller {
     public function UpdateProfile()
     {
     	if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 
 		$id_eo = $this->input->post('id_eo');
@@ -260,13 +251,11 @@ class Dashboard extends CI_Controller {
 
 		if ($this->input->post('profile') == 'update_profile') {
 			if ($query) {
-				echo "<script>alert('Berhasil Memperbarui Profile.')</script>";
-				redirect('event_organizer/profile', 'refresh');
-				die();
+		   		$this->session->set_flashdata('success', 'Berhasil Memperbarui Profile.');
+		    	redirect(site_url('event_organizer/profile'),'refresh');
 			} else {
-				echo "<script>alert('Gagal Memperbarui Profile.')</script>";
-				redirect('event_organizer/profile', 'refresh');
-				die();
+		   		$this->session->set_flashdata('danger', 'Gagal Memperbarui Profile.');
+		    	redirect(site_url('event_organizer/profile'),'refresh');
 			}
 		}
     }
@@ -274,9 +263,8 @@ class Dashboard extends CI_Controller {
     public function Konfirmasi_pembayaran($id_pembayaran)
     {
     	if(empty($this->session->userdata('id_eo'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 
     	$bayar = array(
@@ -346,14 +334,12 @@ class Dashboard extends CI_Controller {
 	    	$this->DashboardModel->UpdateBayar($id_pembayaran, $bayar);
 	    	// update status pendaftaran
 	    	$this->DashboardModel->UpdateDaftar($id_pendaftaran, $daftar);
-		   	echo "<script>alert('Berhasil Mengirim Email kepada peserta.')</script>";
-		    redirect('event_organizer/pembayaran/'.$kode_event, 'refresh');
-		    die();
+		   	$this->session->set_flashdata('success', 'Berhasil Mengirim Email kepada peserta.');
+		    redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
 		    // echo $this->email->print_debugger();
 		} else {
-		   	echo "<script>alert('Gagal Mengirim Email ke Peserta.')</script>";
-		    redirect('event_organizer/pembayaran/'.$kode_event, 'refresh');
-		    die();
+		   	$this->session->set_flashdata('success', 'Gagal Mengirim Email ke Peserta.');
+		    redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
 		    // echo $this->email->print_debugger();
 		}
     }

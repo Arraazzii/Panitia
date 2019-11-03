@@ -27,6 +27,12 @@
             <h1 class="float-sm-left">Tambah Invoice</h1>
         </div>
     </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
 

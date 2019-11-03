@@ -15,9 +15,8 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $data['event'] = $this->EventModel->eventNow();
 	    $data['upcoming'] = $this->EventModel->upcoming();
@@ -27,9 +26,8 @@ class Dashboard extends CI_Controller {
 	public function profile()
 	{
 		if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 	    $var['profile'] = $this->DashboardModel->profile();
 		$this->load->view('peserta/profile', $var);
@@ -38,9 +36,8 @@ class Dashboard extends CI_Controller {
 	public function event_now()
 	{
 		if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$this->load->view('peserta/event_now');
 	}
@@ -48,9 +45,8 @@ class Dashboard extends CI_Controller {
 	public function upcoming()
 	{
 		if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 		$this->load->view('peserta/upcoming');
 	}
@@ -58,9 +54,8 @@ class Dashboard extends CI_Controller {
     public function DaftarEvent($kode_event)
     {
     	if (!$this->session->userdata('id_peserta')) {
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
     	}
 
 		$kode = $kode_event;
@@ -71,9 +66,8 @@ class Dashboard extends CI_Controller {
 	    $check = $this->DashboardModel->CheckKeikutsertaan($var['profile']->ID_PESERTA, $var['detail']->KODE_EVENTS);
 
 	    if ($check) {
-	    	echo "<script>alert('Anda Telah Terdaftar Di Event ini');</script>";
-	    	redirect('peserta/dashboard', 'refresh');
-	    	die();
+		   	$this->session->set_flashdata('danger', 'Anda Telah Terdaftar Di Event ini.');
+		    redirect(site_url('peserta/dashboard'),'refresh');
 	    } else {
 	    	$query = $this->DashboardModel->CheckKelengkapan();
 
@@ -89,9 +83,8 @@ class Dashboard extends CI_Controller {
 	public function prosesDaftar()
 	{
 		if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 
 		$id_peserta = $this->input->post('id_peserta');
@@ -109,21 +102,18 @@ class Dashboard extends CI_Controller {
 
 		if ($this->input->post('profile') == 'update_profile') {
 			if ($query) {
-				echo "<script>alert('Berhasil Memperbarui Profile.')</script>";
-				redirect('peserta/profile', 'refresh');
-				die();
+		   		$this->session->set_flashdata('success', 'Berhasil Memperbarui Profile.');
+		    	redirect(site_url('peserta/profile'),'refresh');
 			} else {
-				echo "<script>alert('Gagal Memperbarui Profile.')</script>";
-				redirect('peserta/profile', 'refresh');
-				die();
+		   		$this->session->set_flashdata('danger', 'Gagal Memperbarui Profile.');
+		    	redirect(site_url('peserta/profile'),'refresh');
 			}
 		} else {
 			if ($query) {
 		    	redirect(site_url('peserta/pembayaran/'.$this->input->post('kode_events')));
 			} else {
-				echo "<script>alert('Gagal Memperbarui Profile.')</script>";
-				redirect('daftar_event/'.$this->input->post('kode_events'), 'refresh');
-				die();
+		   		$this->session->set_flashdata('danger', 'Gagal Memperbarui Profile.');
+		    	redirect(site_url('daftar_event/'.$this->input->post('kode_events')), 'refresh');
 			}
 		}
 	}
@@ -131,9 +121,8 @@ class Dashboard extends CI_Controller {
     public function KonfirmasiPendaftaran()
     {
     	if(empty($this->session->userdata('id_peserta'))){
-			echo "<script>alert('Silahkan Login Dahulu.')</script>";
-			redirect('login', 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
 	    }
 
 		$daftar = array(
@@ -162,10 +151,9 @@ class Dashboard extends CI_Controller {
 		    $config['max_height'] = 0;
 		    $this->load->library('upload', $config);
 		    if (!$this->upload->do_upload('bukti')){
-		    	echo "<script>alert('Gagal Upload Bukti Pembayaran.')</script>";
 		    	$this->DashboardModel->DeletePendaftaran($id_pendaftaran);
-				redirect('detail_event/'.$this->input->post('kode_events'), 'refresh');
-				die(); 
+		   		$this->session->set_flashdata('danger', 'Gagal Upload Bukti Pembayaran.');
+		    	redirect(site_url('detail_event/'.$this->input->post('kode_events')), 'refresh');
 		    }else{
 		    	$_dataBukti = array('upload_bukti' => $this->upload->data());
 		    	$bayar = array(
@@ -182,13 +170,11 @@ class Dashboard extends CI_Controller {
 	    $queryBayar = $this->DashboardModel->BayarEvent($bayar);
 
 	    if ($queryBayar) {
-	    	echo "<script>alert('Berhasil Mendaftar, Silahkan Tunggu Konfirmasi dari Panitia.')</script>";
-			redirect('detail_event/'.$this->input->post('kode_events'), 'refresh');
-			die();
+		   	$this->session->set_flashdata('success', 'Berhasil Mendaftar, Silahkan Tunggu Konfirmasi dari Panitia.');
+		    redirect(site_url('detail_event/'.$this->input->post('kode_events')), 'refresh');
 	    } else {
-	    	echo "<script>alert('Gagal Mendaftar.')</script>";
-			redirect('detail_event/'.$this->input->post('kode_events'), 'refresh');
-			die();
+		   	$this->session->set_flashdata('danger', 'Gagal Mendaftar.');
+		    redirect(site_url('detail_event/'.$this->input->post('kode_events')),'refresh');
 	    }
     }
 }

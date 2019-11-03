@@ -27,6 +27,12 @@
             <h1>Pembayaran</h1>
         </div>
     </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
     
     <div class="container">
 

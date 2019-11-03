@@ -24,6 +24,12 @@
     
         <div class="patern py-3">
         </div>
+
+    <!-- alert -->
+    <?php
+        include 'global/_alert.php';
+    ?>
+    <!-- end alert -->
         
         <div class="container">
     
