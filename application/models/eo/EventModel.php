@@ -66,6 +66,24 @@ class EventModel extends CI_Model {
         }
     }
 
+    public function ended()
+    {
+
+        if ($this->session->userdata('id_eo')) {
+            $this->db->where('created_by', $this->session->userdata('id_eo'));
+        }
+        $this->db->limit(4);
+        $this->db->where('status', 0);
+        $this->db->order_by('kode_events', 'DESC');
+        $this->db->from('form_event');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return FALSE;
+        }
+    }
+
     public function get_current_page($limit, $start) {
         $this->db->limit($limit, $start);
     	if ($this->session->userdata('id_eo')) {
@@ -95,7 +113,6 @@ class EventModel extends CI_Model {
     {
     	if ($this->session->userdata('id_eo')) {
             $this->db->where('created_by', $this->session->userdata('id_eo'));
-            $this->db->where('status', 0);
         }
         $this->db->where('status', 1);
         return $this->db->count_all('form_event');
@@ -125,6 +142,38 @@ class EventModel extends CI_Model {
     }
      
     public function totalEventsUpcoming() 
+    {
+        if ($this->session->userdata('id_eo')) {
+            $this->db->where('created_by', $this->session->userdata('id_eo'));
+        }
+        $this->db->where('status', 2);
+        return $this->db->count_all('form_event');
+    }
+
+    public function get_current_page_ended($limit, $start) {
+        $this->db->limit($limit, $start);
+        if ($this->session->userdata('id_eo')) {
+            $this->db->where('created_by', $this->session->userdata('id_eo'));
+        }
+        $this->db->where('status', 0);
+        $this->db->order_by('kode_events', 'DESC');
+        $query = $this->db->get('form_event');
+        $rows = $query->result();
+ 
+        if ($query->num_rows() > 0) 
+        {
+            foreach ($rows as $row) 
+            {
+                $data[] = $row;
+            }
+             
+            return $data;
+        }
+ 
+        return false;
+    }
+     
+    public function totalEventsEnded() 
     {
         if ($this->session->userdata('id_eo')) {
             $this->db->where('created_by', $this->session->userdata('id_eo'));

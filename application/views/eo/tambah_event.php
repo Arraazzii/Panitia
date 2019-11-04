@@ -91,10 +91,12 @@
                             <div class="col-sm-6">
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <?php echo form_upload('agenda'); ?>
-                                        <!-- <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label> -->
+                                        <!-- <?php echo form_upload('agenda'); ?> -->
+                                        <input name="agenda" type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                                     </div>
                                 </div>
+                                <span>* File Agenda Berekstensi .jpg / .png / .jpeg</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -167,10 +169,13 @@
                             <div class="col-sm-6">
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <?php echo form_upload('flayer'); ?>
-                                        <!-- <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label> -->
+                                        <!-- <?php echo form_upload('flayer'); ?> -->
+                                        <input name="flayer" type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                                     </div>
                                 </div>
+                                <span>* File Flayer Berekstensi .jpg / .png / .jpeg</span>
+                                <br><span>* Ukuran lebar x tinggi -> 600 x 1200</span>
                             </div>
                         </div>
                         <div class="form-group row">

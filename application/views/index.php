@@ -129,6 +129,35 @@
             </div>
         </div>
 
+        <div class="mt-5">
+            <h2>Ended Events</h2><div class="line"></div>
+            <div class="row mt-5">
+            <?php if(!empty($ended)) : ?>
+                <?php foreach ($ended as $row) : ?>
+                <div class="col-md-3 col-6">
+                    <div class="card border-0">
+                        <div class="hovereffect">
+                            <img class="card-img-top" src="<?= base_url() ?>assets/img/flayer/<?= $row->FLAYER ?>" alt="">
+                            <!-- <div class="overlay">
+                                <h2><?= $row->JUDUL_ACARA ?></h2>
+                                <a class="info" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>">Lihat</a>
+                                <br/>
+                                <a class="info" href="<?= site_url('daftar_event/'.$row->KODE_EVENTS) ?>">Daftar</a>
+                            </div> -->
+                        </div>
+                        <div class="card-body border-0">
+                            <a class="nav-link" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>"><h5 class="card-title text-center"><?= $row->JUDUL_ACARA ?></h5></a>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>    
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="<?= site_url('ended') ?>" class="btn btn-primary btn-soft-b btn-sm"> View More </a>
+            </div>
+        </div>
+
     <!-- end content -->
     </div>
 

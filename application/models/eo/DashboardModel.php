@@ -25,6 +25,13 @@ class DashboardModel extends CI_Model {
 		return $query->num_rows();
 	}
 
+	public function CountInvoice()
+	{
+		$this->db->where('created_by', $this->session->userdata('id_eo'));
+		$query = $this->db->get('form_invoice');
+		return $query->num_rows();
+	}
+
 	public function profile()
 	{
 		$this->db->where('ID_EO', $this->session->userdata('id_eo'));

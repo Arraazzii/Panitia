@@ -24,8 +24,7 @@
     
     <div class="patern py-3">
         <div class="container">
-            <h1 class="float-sm-left">Invoice</h1>
-            <a href="<?= site_url('event_organizer/add_invoice') ?>" class="btn rounded-100 btn-primary btn-soft-b float-sm-right"><i class="mdi mdi-plus"></i> Tambah Invoice </a>
+            <h1 class="float-sm-left">Peserta</h1>
         </div>
     </div>
 
@@ -50,28 +49,22 @@
                                 <tr>
                                     <th>No</th>
                                     <th>
-                                        Kode Event
+                                        Nama
                                     </th>
                                     <th>
-                                        Nilai
+                                        No HP
                                     </th>
                                     <th>
-                                        Bank
+                                        Email
                                     </th>
                                     <th>
-                                        No Rek
+                                        Pekerjaan
                                     </th>
                                     <th>
-                                        Nama Rek
+                                        Gender
                                     </th>
                                     <th>
-                                        Invoice
-                                    </th>
-                                    <th>
-                                        Tanggal
-                                    </th>
-                                    <th>
-                                        Action
+                                        Minat
                                     </th>
                                 </tr>
                             </thead>
@@ -113,14 +106,14 @@
          
                 // Load data for the table's content from an Ajax source
                 "ajax": {
-                    "url": "<?php echo site_url('get_list_invoice')?>",
+                    "url": "<?php echo site_url('get_list_user')?>",
                     "type": "POST"
                 },
          
                 //Set column definition initialisation properties.
                 "columnDefs": [
                 { 
-                    "targets": [0,3,4,5,6], 
+                    "targets": [0], 
                     "orderable": true, //set orderable
                 },
                 ],

@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('eo/DaftarEventModel');
         $this->load->model('eo/DaftarPembayaranModel');
         $this->load->model('eo/DaftarInvoiceModel');
+        $this->load->model('eo/DaftarUserModel');
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('url','html','form'));
     }
@@ -25,6 +26,7 @@ class Dashboard extends CI_Controller {
 		$data['count_peserta'] = $this->DashboardModel->CountPeserta();
 		$data['count_myevents'] = $this->DashboardModel->CountMyEvents();
 		$data['count_jadwal'] = $this->DashboardModel->CountJadwal();
+        $data['count_invoice'] = $this->DashboardModel->CountInvoice();
 	    $data['event'] = $this->EventModel->eventNow();
 		$this->load->view('eo/dashboard', $data);
 	}
@@ -435,6 +437,45 @@ class Dashboard extends CI_Controller {
 		    redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
 		    // echo $this->email->print_debugger();
 		}
+    }
+
+    public function User()
+    {
+        if(empty($this->session->userdata('id_eo'))){
+            $this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+            redirect(site_url('login'),'refresh');
+        }
+        $this->load->view('eo/peserta');
+    }
+
+    public function get_list_user()
+    {
+
+        $list = $this->DaftarUserModel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $no = 1;
+        foreach ($list as $user) {
+            $row = array();
+            $row[] = $no++;
+            $row[] = $user->NAMA;
+            $row[] = $user->NOHP;
+            $row[] = $user->EMAIL;
+            $row[] = $user->PEKERJAAN;
+            $row[] = $user->JENIS_KELAMIN;
+            $row[] = $user->JUDUL;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DaftarUserModel->count_all(),
+            "recordsFiltered" => $this->DaftarUserModel->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
     }
 
 }

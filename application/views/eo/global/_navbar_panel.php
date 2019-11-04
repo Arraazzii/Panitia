@@ -17,6 +17,9 @@
                     <a class="nav-link" href="<?= site_url('event_organizer/pembayaran') ?>"><i class="mdi mdi-cart-outline"></i> Pembayaran</a>
                 </li> -->
                 <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('event_organizer/peserta') ?>"><i class="mdi mdi-account"></i> Peserta</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?= site_url('event_organizer/invoice') ?>"><i class="mdi mdi-cart-outline"></i> Invoice</a>
                 </li>
                 <li class="nav-item">

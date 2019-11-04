@@ -83,6 +83,7 @@
                                         <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                                     </div>
                                 </div>
+                                <span>* File Invoice Berekstensi .pdf</span>
                             </div>
                         </div>
                         <div class="form-group row">

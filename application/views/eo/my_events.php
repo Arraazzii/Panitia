@@ -50,8 +50,10 @@
                                 <a class="info" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>">Lihat</a><br/>
                                 <?php if ($row->STATUS == 2) : ?>
                                     <a class="info" onclick="return confirm('Are You sure you want to Activate this event?');" href="<?= site_url('aktifkan_event/'.$row->KODE_EVENTS) ?>">Aktifkan</a>
-                                <?php else : ?>
+                                <?php elseif($row->STATUS == 1) : ?>
                                     <a class="info" onclick="return confirm('Are You sure you want to Non Activate this event?');" href="<?= site_url('nonaktifkan_event/'.$row->KODE_EVENTS) ?>">Non Aktifkan</a>
+                                <?php elseif($row->STATUS == 0) : ?>
+                                    <a class="info" href="#">Event Selesai</a>
                                 <?php endif; ?>
                             </div>
                         </div>

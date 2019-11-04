@@ -12,6 +12,7 @@ $route['error/404'] = 'errors/pageNotFound';
 $route['index'] = 'landingPage/index';
 $route['event_now'] = 'landingPage/event_now';
 $route['upcoming'] = 'landingPage/upcoming';
+$route['ended'] = 'landingPage/ended';
 $route['login'] = 'landingPage/login';
 $route['proses_login'] = 'landingPage/loginProses';
 $route['register'] = 'landingPage/register';
@@ -52,6 +53,7 @@ $route['peserta/profile'] = 'peserta/Dashboard/profile';
 $route['peserta/proses_daftar'] = 'peserta/Dashboard/ProsesDaftar';
 $route['peserta/upcoming'] = 'landingPage/upcoming';
 $route['peserta/event_now'] = 'landingPage/event_now';
+$route['peserta/ended'] = 'landingPage/event_now';
 $route['peserta/upload_pembayaran/(:any)'] = 'peserta/Dashboard/uploadPembayaran/$1';
 $route['ubah_password'] = 'landingPage/UpdatePassword';
 
@@ -80,6 +82,9 @@ $route['event_organizer/add_invoice'] = 'eo/Dashboard/tambah_invoice';
 $route['proses_tambah_invoice'] = 'eo/Dashboard/ProsesTambahInvoice';
 $route['get_list_invoice'] = 'eo/Dashboard/get_list_invoice';
 $route['delete_invoice/(:any)'] = 'eo/Dashboard/deleteInvoice/$1';
+
+$route['event_organizer/peserta'] = 'eo/Dashboard/User';
+$route['get_list_user'] = 'eo/Dashboard/get_list_user';
 
 $route['Konfirmasi_pembayaran/(:any)'] = 'eo/Dashboard/Konfirmasi_pembayaran/$1';
 $route['update_profile'] = 'eo/Dashboard/UpdateProfile';

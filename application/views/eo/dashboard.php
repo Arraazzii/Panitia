@@ -40,7 +40,7 @@
     <!-- content -->
         <div class="mt-5">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card shadow rounded p-3 border-0">
                         <div class="row">
                             <div class="col-4 text-center">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card shadow rounded p-3 border-0">
                         <div class="row">
                             <div class="col-4 text-center">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card shadow rounded p-3 border-0">
                         <div class="row">
                             <div class="col-4 text-center">
@@ -75,6 +75,19 @@
                             <div class="col-8">
                                 <h3><?= !empty($count_jadwal)? $count_jadwal:'0' ?></h3>
                                 <h5>Jadwal</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow rounded p-3 border-0">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <h1><i class="mdi mdi-cart-outline"></i></h1>
+                            </div>
+                            <div class="col-8">
+                                <h3><?= !empty($count_invoice)? $count_invoice:'0' ?></h3>
+                                <h5>Invoice</h5>
                             </div>
                         </div>
                     </div>
@@ -94,10 +107,12 @@
                             <div class="overlay">
                                 <h2><?= $row->KODE_EVENTS ?></h2>
                                 <a class="info" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>">Lihat</a><br/>
-                                <?php if ($row->STATUS == 0) : ?>
+                                <?php if ($row->STATUS == 2) : ?>
                                     <a class="info" onclick="return confirm('Are You sure you want to Activate this event?');" href="<?= site_url('aktifkan_event/'.$row->KODE_EVENTS) ?>">Aktifkan</a>
-                                <?php else : ?>
+                                <?php elseif($row->STATUS == 1) : ?>
                                     <a class="info" onclick="return confirm('Are You sure you want to Non Activate this event?');" href="<?= site_url('nonaktifkan_event/'.$row->KODE_EVENTS) ?>">Non Aktifkan</a>
+                                <?php elseif($row->STATUS == 0) : ?>
+                                    <a class="info" href="#">Event Selesai</a>
                                 <?php endif; ?>
                             </div>
                         </div>

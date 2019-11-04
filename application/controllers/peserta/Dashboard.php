@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller {
 	    }
 	    $data['event'] = $this->EventModel->eventNow();
 	    $data['upcoming'] = $this->EventModel->upcoming();
+	    $data['ended'] = $this->EventModel->ended();
 		$this->load->view('peserta/dashboard', $data);
 	}
 

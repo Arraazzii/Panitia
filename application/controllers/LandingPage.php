@@ -19,6 +19,7 @@ class landingPage extends CI_Controller {
 	{
 	    $data['event'] = $this->EventModel->eventNow();
 	    $data['upcoming'] = $this->EventModel->upcoming();
+	    $data['ended'] = $this->EventModel->ended();
 		$this->load->view('index', $data);
 	}
 
@@ -133,6 +134,63 @@ class landingPage extends CI_Controller {
 		$this->load->view('upcoming', $params);
 	    } else {
 	    	$this->load->view('peserta/upcoming', $params);
+	    }
+	}
+
+	public function ended()
+	{
+		//set params
+	    $params = array();
+	    //set records per page
+	    $limit_page = 16;
+	    $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) : 0;
+	    $total = $this->EventModel->totalEventsEnded();
+	    if ($total > 0) 
+        {
+            // get current page records
+            $params['results'] = $this->EventModel->get_current_page_ended($limit_page, $page * $limit_page);
+             
+            $config['base_url'] = site_url('event_organizer/events');
+            $config['total_rows'] = $total;
+            $config['per_page'] = $limit_page;
+            $config['uri_segment'] = 3;
+
+            //paging configuration
+            $config['num_links'] = 2;
+            $config['use_page_numbers'] = TRUE;
+            $config['reuse_query_string'] = TRUE;
+            
+            //bootstrap pagination 
+            $config['full_tag_open'] = '<ul class="pagination">';
+			$config['full_tag_close'] = '</ul>';
+			$config['attributes'] = ['class' => 'page-link'];
+			$config['first_link'] = false;
+			$config['last_link'] = false;
+			$config['first_tag_open'] = '<li class="page-item">';
+			$config['first_tag_close'] = '</li>';
+			$config['prev_link'] = '&laquo';
+			$config['prev_tag_open'] = '<li class="page-item">';
+			$config['prev_tag_close'] = '</li>';
+			$config['next_link'] = '&raquo';
+			$config['next_tag_open'] = '<li class="page-item">';
+			$config['next_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li class="page-item">';
+			$config['last_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li class="page-item active"><a href="#" class="page-link">';
+			$config['cur_tag_close'] = '<span class="sr-only">(current)</span></a></li>';
+			$config['num_tag_open'] = '<li class="page-item">';
+			$config['num_tag_close'] = '</li>';
+             
+            $this->pagination->initialize($config);
+             
+            // build paging links
+            $params['links'] = $this->pagination->create_links();
+        }
+	    // $data['event'] = $this->EventModel->myEvent();
+	    if (!$this->session->userdata('id_peserta')) {
+		$this->load->view('ended', $params);
+	    } else {
+	    	$this->load->view('peserta/ended', $params);
 	    }
 	}
 
