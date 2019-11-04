@@ -21,16 +21,16 @@
         include 'global/_navbar_panel.php';
     ?>
     <!-- end navbar -->
-    
-    <div class="patern">
-
-    </div>
 
     <!-- alert -->
     <?php
         include 'global/_alert.php';
     ?>
     <!-- end alert -->
+    
+    <div class="patern">
+
+    </div>
     
     <div class="container">
 
@@ -49,10 +49,10 @@
                     <h5>Minat:</h5>
                     <h5><b><?= $detail->JUDUL ?></b></h5>
                 </p>
-                <p>
+                <!-- <p>
                     <a href="<?= site_url('daftar_peserta/'.$detail->KODE_EVENTS) ?>" class="btn btn-info btn-md"><i class="mdi mdi-eye"></i> Daftar Peserta</a>
                     <a href="<?= site_url('event_organizer/pembayaran/'.$detail->KODE_EVENTS) ?>" class="btn btn-success btn-md"><i class="mdi mdi-check"></i> Konfirmasi Pendaftaran</a>
-                </p>
+                </p> -->
             </div>
             <div class="col-md-3 p-3">
                 <h4>Jadwal Pelaksanaan</h4>
@@ -123,35 +123,6 @@
     <?php
         include 'global/_js.php';
     ?>
-
-    <script>
-        $(document).ready(function() {
-            // executes when HTML-Document is loaded and DOM is ready
-
-            // breakpoint and up  
-            $(window).resize(function(){
-                if ($(window).width() >= 980){	
-
-                // when you hover a toggle show its dropdown menu
-                $(".navbar .dropdown-toggle").hover(function () {
-                    $(this).parent().toggleClass("show");
-                    $(this).parent().find(".dropdown-menu").toggleClass("show"); 
-                });
-
-                    // hide the menu when the mouse leaves the dropdown
-                $( ".navbar .dropdown-menu" ).mouseleave(function() {
-                    $(this).removeClass("show");  
-                });
-            
-                    // do something here
-                }	
-            });  
-            
-            
-
-        // document ready  
-        });
-    </script>
 
   </body>
 </html>

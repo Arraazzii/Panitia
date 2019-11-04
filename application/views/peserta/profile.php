@@ -22,8 +22,11 @@
     ?>
     <!-- end navbar -->
     
-        <div class="patern py-3">
+    <div class="patern py-3">
+        <div class="container">
+            <h1 class="float-sm-left">Profile</h1>
         </div>
+    </div>
 
     <!-- alert -->
     <?php
@@ -143,6 +146,17 @@
                                                     <option value="Rp 5.000.000 - Rp 10.000.000">Rp 5.000.000 - Rp 10.000.000</option>
                                                     <option value="Rp 10.000.000 - Rp 25.000.000">Rp 10.000.000 - Rp 25.000.000</option>
                                                     <option value=" > Rp 2.500.000"> > Rp 2.500.000</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Minat Events</label>
+                                            <div class="col-sm-8">
+                                                <select name="id_minat" class="form-control" id="exampleFormControlSelect1" required />
+                                                    <option value="<?= $profile->ID_MINAT ?>" selected=""><?= $profile->JUDUL ?></option>
+                                                    <?php foreach ($minat as $var): ?>
+                                                        <option value="<?= $var->ID_MINAT ?>"><?= $var->JUDUL ?></option>
+                                                    <?php endforeach ?>
                                                 </select>
                                             </div>
                                         </div>

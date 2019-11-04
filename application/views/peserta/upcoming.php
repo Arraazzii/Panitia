@@ -44,13 +44,15 @@
                     <div class="card border-0">
                         <div class="hovereffect">
                             <img class="card-img-top" src="<?= base_url() ?>assets/img/flayer/<?= $row->FLAYER ?>" alt="">
-                            <div class="overlay">
-                                <h2><?= $row->JUDUL_ACARA ?></h2><br/>
+                            <!-- <div class="overlay">
+                                <h2><?= $row->JUDUL_ACARA ?></h2>
                                 <a class="info" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>">Lihat</a>
-                            </div>
+                                <br/>
+                                <a class="info" href="<?= site_url('daftar_event/'.$row->KODE_EVENTS) ?>">Daftar</a>
+                            </div> -->
                         </div>
                         <div class="card-body border-0">
-                            <h5 class="card-title text-center"><?= $row->JUDUL_ACARA ?></h5>
+                            <a class="nav-link" href="<?= site_url('detail_event/'.$row->KODE_EVENTS) ?>"><h5 class="card-title text-center"><?= $row->JUDUL_ACARA ?></h5></a>
                         </div>
                     </div>
                 </div>

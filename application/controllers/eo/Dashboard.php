@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('eo/DashboardModel');
         $this->load->model('eo/EventModel');
         $this->load->model('eo/DaftarPesertaModel');
+        $this->load->model('eo/DaftarEventModel');
         $this->load->model('eo/DaftarPembayaranModel');
         $this->load->model('eo/DaftarInvoiceModel');
         $this->load->library(array('form_validation','session'));
@@ -37,6 +38,98 @@ class Dashboard extends CI_Controller {
 	    $var['profile'] = $this->DashboardModel->profile();
 		$this->load->view('eo/profile', $var);
 	}
+
+	public function ListEventPembayaran()
+	{
+		if(empty($this->session->userdata('id_eo'))){
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
+	    }
+		$this->load->view('eo/list_event_pembayaran');
+	}
+
+	public function get_list_event_pembayaran()
+    {
+
+        $list = $this->DaftarEventModel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $no = 1;
+        foreach ($list as $event) {
+        	if ($event->STATUS == 2) {
+        		$status = 'UPCOMING';
+        	} elseif ($event->STATUS == 1) {
+        		$status = 'NOW';
+        	} else {
+        		$status = 'END';
+        	}
+            $row = array();
+            $row[] = $no++;
+            $row[] = $event->KODE_EVENTS;
+            $row[] = $event->JUDUL_ACARA;
+            $row[] = $event->LOKASI;
+            $row[] = $event->STATUS_EVENT;
+            $row[] = $status;
+            $row[] = '<a class="btn btn-info btn-sm" target="_blank" title="Hapus" href="'.site_url('event_organizer/pembayaran/'.$event->KODE_EVENTS).'"><i class="mdi mdi-eye"></i> Lihat</a>';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DaftarEventModel->count_all(),
+            "recordsFiltered" => $this->DaftarEventModel->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+	public function ListEventPendaftaran()
+	{
+		if(empty($this->session->userdata('id_eo'))){
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
+	    }
+		$this->load->view('eo/list_event_pendaftaran');
+	}
+
+	public function get_list_event_pendaftaran()
+    {
+
+        $list = $this->DaftarEventModel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $no = 1;
+        foreach ($list as $event) {
+        	if ($event->STATUS == 2) {
+        		$status = 'UPCOMING';
+        	} elseif ($event->STATUS == 1) {
+        		$status = 'NOW';
+        	} else {
+        		$status = 'END';
+        	}
+            $row = array();
+            $row[] = $no++;
+            $row[] = $event->KODE_EVENTS;
+            $row[] = $event->JUDUL_ACARA;
+            $row[] = $event->LOKASI;
+            $row[] = $event->STATUS_EVENT;
+            $row[] = $status;
+            $row[] = '<a class="btn btn-info btn-sm" target="_blank" title="Hapus" href="'.site_url('daftar_peserta/'.$event->KODE_EVENTS).'"><i class="mdi mdi-eye"></i> Lihat</a>';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DaftarEventModel->count_all(),
+            "recordsFiltered" => $this->DaftarEventModel->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
 
 	public function DaftarPeserta($kode_events)
 	{

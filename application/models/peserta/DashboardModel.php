@@ -5,17 +5,19 @@ class DashboardModel extends CI_Model {
 
 	public function profile()
 	{
+		$this->db->join('form_minat', 'form_minat.ID_MINAT=user_participant.ID_MINAT', 'left');
 		$this->db->where('ID_PESERTA', $this->session->userdata('id_peserta'));
 		$query = $this->db->get('user_participant');
 		return $query->row();
 	}
+
 	public function CheckKelengkapan()
 	{
 		$this->db->where('id_peserta', $this->session->userdata('id_peserta'));
 		$query = $this->db->get('user_participant');
 		if ($query->num_rows() > 0) {
 			$row = $query->row();
-			if (!empty($row->JENIS_KELAMIN) & !empty($row->TGL_LAHIR) & !empty($row->STATUS_PERNIKAHAN) & !empty($row->PEKERJAAN) & !empty($row->PENDAPATAN)) {
+			if (!empty($row->JENIS_KELAMIN) & !empty($row->TGL_LAHIR) & !empty($row->STATUS_PERNIKAHAN) & !empty($row->PEKERJAAN) & !empty($row->PENDAPATAN) & !empty($row->ID_MINAT)) {
 				return TRUE;
 			} else {
 				return FALSE;

@@ -24,8 +24,7 @@
     
     <div class="patern py-3">
         <div class="container">
-            <h1 class="float-sm-left">Invoice</h1>
-            <a href="<?= site_url('event_organizer/add_invoice') ?>" class="btn rounded-100 btn-primary btn-soft-b float-sm-right"><i class="mdi mdi-plus"></i> Tambah Invoice </a>
+            <h1>Pembayaran</h1>
         </div>
     </div>
 
@@ -40,38 +39,31 @@
     <!-- content -->
         <div class="mt-5">
             <div class="shadow rounded p-5 bg-white">
-                <!-- <div class="mb-5">
-                    <button class="btn btn-success btn-done print"><i class="mdi mdi-printer"></i> Cetak </button>
-                </div> -->
                 <div class="row">
                         <div class="table-responsive">
                             <table id="data-table" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>
-                                        Kode Event
+                                        No
                                     </th>
                                     <th>
-                                        Nilai
+                                        Kode Events
                                     </th>
                                     <th>
-                                        Bank
+                                        Events
                                     </th>
                                     <th>
-                                        No Rek
+                                        Lokasi
                                     </th>
                                     <th>
-                                        Nama Rek
+                                        Kategori
                                     </th>
                                     <th>
-                                        Invoice
+                                        Status
                                     </th>
                                     <th>
-                                        Tanggal
-                                    </th>
-                                    <th>
-                                        Action
+                                        Aksi
                                     </th>
                                 </tr>
                             </thead>
@@ -101,7 +93,6 @@
 
     <script>
         var table;
-        var kode_events = $('#kode_events').val();
  
         $(document).ready(function() {
          
@@ -114,14 +105,14 @@
          
                 // Load data for the table's content from an Ajax source
                 "ajax": {
-                    "url": "<?php echo site_url('get_list_invoice')?>",
+                    "url": "<?php echo site_url('get_list_event_pembayaran')?>",
                     "type": "POST"
                 },
          
                 //Set column definition initialisation properties.
                 "columnDefs": [
                 { 
-                    "targets": [0,3,4,5,6], 
+                    "targets": [0,5], 
                     "orderable": true, //set orderable
                 },
                 ],

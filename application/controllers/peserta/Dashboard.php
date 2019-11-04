@@ -7,6 +7,8 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('peserta/DashboardModel');
+        $this->load->model('peserta/DaftarMyEventModel');
+        $this->load->model('peserta/DaftarPembayaranModel');
         $this->load->model('eo/EventModel');
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('url','html','form'));
@@ -30,6 +32,7 @@ class Dashboard extends CI_Controller {
 		    redirect(site_url('login'),'refresh');
 	    }
 	    $var['profile'] = $this->DashboardModel->profile();
+	    $var['minat'] = $this->EventModel->Minat();
 		$this->load->view('peserta/profile', $var);
 	}
 
@@ -176,5 +179,109 @@ class Dashboard extends CI_Controller {
 		   	$this->session->set_flashdata('danger', 'Gagal Mendaftar.');
 		    redirect(site_url('detail_event/'.$this->input->post('kode_events')),'refresh');
 	    }
+    }
+
+    public function pembayaran()
+	{
+		if(empty($this->session->userdata('id_peserta'))){
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
+	    }
+
+		$this->load->view('peserta/list_pembayaran');
+	}
+
+	public function get_list_pembayaran_peserta()
+    {
+
+        $list = $this->DaftarPembayaranModel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $no = 1;
+        foreach ($list as $pembayaran) {
+
+            $row = array();
+            $row[] = $no++;
+            $row[] = $pembayaran->JUDUL_ACARA;
+            $row[] = $pembayaran->NAMA_BANK;
+            $row[] = $pembayaran->NO_REKENING;
+            $row[] = $pembayaran->NAMA_REKENING;
+            $row[] = '<a href="javascript:void(0)" class="detail" data-images="'.$pembayaran->BUKTI_TRANSFER.'" data-id="'.$pembayaran->ID_PEMBAYARAN.'">Bukti.png</a>';
+
+            if ($pembayaran->STATUS_PEMBAYARAN == 1) {
+            	//add html for action
+            	$row[] = '<button type="button" class="btn btn-light btn-sm"><i class="mdi mdi-check"></i> Sudah Dikonfirmasi</button>';
+            } else {
+            	//add html for action
+            	$row[] = '<button type="button" class="btn btn-light btn-sm"><i class="mdi mdi-clock"></i> Menunggu Konfirmasi</button>';
+            }
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DaftarPembayaranModel->count_all(),
+            "recordsFiltered" => $this->DaftarPembayaranModel->count_filtered(),
+            "data" => $data,
+       	);
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function getListClickked(){
+		$id = $this->input->post('id');
+
+		$result = $this->DaftarPembayaranModel->getpembayaranclickList($id);
+		echo json_encode($result);
+
+	}
+
+    public function myevent()
+	{
+		if(empty($this->session->userdata('id_peserta'))){
+		   	$this->session->set_flashdata('danger', 'Silahkan Login Dahulu.');
+		    redirect(site_url('login'),'refresh');
+	    }
+
+		$this->load->view('peserta/list_myevent_peserta');
+	}
+
+	public function get_list_myevent_peserta()
+    {
+        $list = $this->DaftarMyEventModel->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        $no = 1;
+        foreach ($list as $event) {
+
+        	if ($event->STATUS == 2) {
+        		$status = 'UPCOMING';
+        	} elseif ($event->STATUS == 1) {
+        		$status = 'NOW';
+        	} else {
+        		$status = 'END';
+        	}
+
+            $row = array();
+            $row[] = $no++;
+            $row[] = $event->KODE_EVENTS;
+            $row[] = $event->JUDUL_ACARA;
+            $row[] = date('d-m-Y H:i:s', strtotime($event->WAKTU_MULAI));
+            $row[] = date('d-m-Y H:i:s', strtotime($event->WAKTU_AKHIR));
+            $row[] = $event->LOKASI;
+            $row[] = $status;
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DaftarMyEventModel->count_all(),
+            "recordsFiltered" => $this->DaftarMyEventModel->count_filtered(),
+            "data" => $data,
+       	);
+        //output to json format
+        echo json_encode($output);
     }
 }

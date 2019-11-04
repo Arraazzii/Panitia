@@ -55,9 +55,21 @@ $route['peserta/event_now'] = 'landingPage/event_now';
 $route['peserta/upload_pembayaran/(:any)'] = 'peserta/Dashboard/uploadPembayaran/$1';
 $route['ubah_password'] = 'landingPage/UpdatePassword';
 
+$route['peserta/pembayaran'] = 'peserta/Dashboard/pembayaran';
+$route['get_list_pembayaran_peserta'] = 'peserta/Dashboard/get_list_pembayaran_peserta';
+
+$route['peserta/myevent'] = 'peserta/Dashboard/myevent';
+$route['get_list_myevent_peserta'] = 'peserta/Dashboard/get_list_myevent_peserta';
+
 // Event Organizer
 $route['daftar_peserta/(:any)'] = 'eo/Dashboard/DaftarPeserta/$1';
 $route['get_list_daftar'] = 'eo/Dashboard/get_list_daftar';
+
+$route['event_organizer/list_event_pendaftaran'] = 'eo/Dashboard/ListEventPendaftaran';
+$route['get_list_event_pendaftaran'] = 'eo/Dashboard/get_list_event_pendaftaran';
+
+$route['event_organizer/list_event_pembayaran'] = 'eo/Dashboard/ListEventPembayaran';
+$route['get_list_event_pembayaran'] = 'eo/Dashboard/get_list_event_pembayaran';
 
 $route['event_organizer/pembayaran/(:any)'] = 'eo/Dashboard/pembayaran/$1';
 $route['get_list_pembayaran'] = 'eo/Dashboard/get_list_pembayaran';

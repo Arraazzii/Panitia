@@ -55,7 +55,7 @@ class EventModel extends CI_Model {
             $this->db->where('created_by', $this->session->userdata('id_eo'));
         }
         $this->db->limit(4);
-        $this->db->where('status', 0);
+        $this->db->where('status', 2);
         $this->db->order_by('kode_events', 'DESC');
         $this->db->from('form_event');
         $query = $this->db->get();
@@ -106,7 +106,7 @@ class EventModel extends CI_Model {
         if ($this->session->userdata('id_eo')) {
             $this->db->where('created_by', $this->session->userdata('id_eo'));
         }
-        $this->db->where('status', 0);
+        $this->db->where('status', 2);
         $this->db->order_by('kode_events', 'DESC');
         $query = $this->db->get('form_event');
         $rows = $query->result();

@@ -48,25 +48,25 @@
                         <!--  /.container  -->
                     </div>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('peserta/pembayaran') ?>"><i class="mdi mdi-cart-outline"></i> Pembayaran</a>
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('peserta/myevent') ?>"><i class="mdi mdi-book"></i> My Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('peserta/pembayaran') ?>"><i class="mdi mdi-cash"></i> Pembayaran</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control search mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
-                        </a>
-                        <div class="dropdown-menu border-0 shadow animate slideIn" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="<?= site_url('peserta/dashboard') ?>">Dashboard</a>
-                            <a class="dropdown-item" href="<?= site_url('peserta/profile') ?>">Profile</a>
-                            <a class="dropdown-item" onclick="return confirm('Are You sure you want to logout?');" href="<?= site_url('logout_peserta') ?>">Log Out</a>
-                        </div>
-                        </li>   
-                    </ul>
-            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu border-0 shadow animate slideIn" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="<?= site_url('peserta/dashboard') ?>">Dashboard</a>
+                        <a class="dropdown-item" href="<?= site_url('peserta/profile') ?>">Profile</a>
+                        <a class="dropdown-item" onclick="return confirm('Are You sure you want to logout?');" href="<?= site_url('logout_peserta') ?>">Log Out</a>
+                    </div>
+                    </li>   
+                </ul>
             </div>
         </div>
       </nav>

@@ -7,6 +7,7 @@ class landingPage extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('LandingPageModel');
+        $this->load->model('peserta/DashboardModel');
         $this->load->model('eo/EventModel');
         $this->load->library(array('form_validation','session'));
         $this->load->helper(array('url','html','form'));
@@ -157,6 +158,7 @@ class landingPage extends CI_Controller {
         	if ($checkEo == FALSE) {
 		    	$this->session->set_flashdata('danger', 'Gagal Melakukan Login, Silahkan Register atau aktifkan akun anda terlebih dahulu.');
 		    	redirect(site_url('login'),'refresh');
+
 	        } else {
 	        	$user = array(
         			'id_eo' => $checkEo->ID_EO,
@@ -168,8 +170,7 @@ class landingPage extends CI_Controller {
 	        	$this->session->set_userdata($user);
 		    	redirect(site_url('event_organizer/dashboard'),'refresh');
 
-	        }
-	        
+	        } 
 
         } elseif($auth == 'peserta') {
         	$data = array(
@@ -188,9 +189,17 @@ class landingPage extends CI_Controller {
         			'nama' => $checkPeserta->NAMA,
         			'email' => $checkPeserta->EMAIL,
 	        		'status' => 1
-        		);
-        		$this->session->set_userdata($user);
-		    	redirect(site_url('peserta/dashboard'),'refresh');       
+        		);   
+
+		    	$query = $this->DashboardModel->CheckKelengkapan();
+			    if ($query) {
+	        		$this->session->set_userdata($user); 
+			    	redirect(site_url('peserta/dashboard'),'refresh'); 
+			    } else {
+		    		$this->session->set_flashdata('warning', 'Silahkan Lengkapi Data Anda Terlebih Dahulu.');
+        			$this->session->set_userdata($user);
+		    		redirect(site_url('peserta/profile'),'refresh');
+			    }
         	}
 
         }

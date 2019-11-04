@@ -260,7 +260,7 @@ class Event extends CI_Controller {
     public function nonAktifkanEvent($kode_event)
     { 	
     	$data = array(
-    		'status' => 2
+    		'status' => 0
     	);
         $query = $this->EventModel->nonAktifkan($kode_event, $data);
         if ($query) {

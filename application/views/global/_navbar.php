@@ -53,9 +53,6 @@
                     <a class="nav-link" href="<?= site_url('login') ?>"><i class="mdi mdi-login"></i> Log In</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control search mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
             </div>
         </div>
       </nav>

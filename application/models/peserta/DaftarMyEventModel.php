@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
  
-class DaftarPembayaranModel extends CI_Model {
+class DaftarMyEventModel extends CI_Model {
  
     var $table = 'form_pendaftaran';
-    var $column_order = array(null ,'nama','nama_bank','no_rekening','nama_rekening', 'harga', 'bukti_transfer', null); //set column field database for datatable orderable
-    var $column_search = array('nama', 'no_rekening', 'nama_bank'); //set column field database for datatable searchable just firstname , lastname , address are searchable
-    var $order = array('form_pendaftaran.id_pendaftaran' => 'desc'); // default order 
+    var $column_order = array(null , 'form_pendaftaran.kode_events', 'judul_acara', 'waktu_mulai', 'waktu_akhir', 'lokasi', null); //set column field database for datatable orderable
+    var $column_search = array('form_pendaftaran.kode_events', 'judul_acara', 'lokasi'); //set column field database for datatable searchable just firstname , lastname , address are searchable
+    var $order = array('id_pendaftaran' => 'desc'); // default order 
  
     public function __construct()
     {
@@ -14,12 +14,13 @@ class DaftarPembayaranModel extends CI_Model {
         $this->load->database();
     }
  
-    private function _get_datatables_query($kode)
+    private function _get_datatables_query()
     {
-        $this->db->join('form_pembayaran', 'form_pembayaran.ID_PENDAFTARAN=form_pendaftaran.ID_PENDAFTARAN', 'left');
         $this->db->join('user_participant', 'user_participant.ID_PESERTA=form_pendaftaran.ID_PESERTA', 'left');
+        $this->db->join('form_event', 'form_event.KODE_EVENTS=form_pendaftaran.KODE_EVENTS', 'left');
+        $this->db->where('form_pendaftaran.status', 1);
 
-        $this->db->where($this->table.'.kode_events', $kode);
+        $this->db->where($this->table.'.id_peserta', $this->session->userdata('id_peserta'));
         $this->db->from($this->table);
  
         $i = 0;
@@ -56,48 +57,31 @@ class DaftarPembayaranModel extends CI_Model {
         }
     }
  
-    function get_datatables($kode)
+    function get_datatables()
     {
-        $this->_get_datatables_query($kode);
+        $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
  
-    function count_filtered($kode)
+    function count_filtered()
     {
-        $this->_get_datatables_query($kode);
+        $this->_get_datatables_query();
         $query = $this->db->get();
         return $query->num_rows();
     }
  
-    public function count_all($kode)
+    public function count_all()
     {
-        $this->db->join('form_pembayaran', 'form_pembayaran.ID_PENDAFTARAN=form_pendaftaran.ID_PENDAFTARAN', 'left');
         $this->db->join('user_participant', 'user_participant.ID_PESERTA=form_pendaftaran.ID_PESERTA', 'left');
-
-        $this->db->where($this->table.'.kode_events', $kode);
-
+        $this->db->join('form_event', 'form_event.KODE_EVENTS=form_pendaftaran.KODE_EVENTS', 'left');
+        $this->db->where('form_pendaftaran.status', 1);
+        
+        $this->db->where($this->table.'.id_peserta', $this->session->userdata('id_peserta'));
         $this->db->from($this->table);
         return $this->db->count_all_results();
-    }
-
-    public function detailPembayaran($kode)
-    {
-        $this->db->join('form_pembayaran', 'form_pembayaran.ID_PENDAFTARAN=form_pendaftaran.ID_PENDAFTARAN', 'left');
-        $this->db->join('user_participant', 'user_participant.ID_PESERTA=form_pendaftaran.ID_PESERTA', 'left');
-
-        $this->db->where($this->table.'.kode_events', $kode);
-        $query = $this->db->get('form_pendaftaran');
- 
-        return $query->row();
-    }
-
-    public function getpembayaranclickList($id)
-    {
-        $sql = $this->db->select('BUKTI_TRANSFER, ID_PEMBAYARAN')->from('form_pembayaran')->where('ID_PEMBAYARAN', $id)->get()->result();
-        return $sql;
     }
  
 }
