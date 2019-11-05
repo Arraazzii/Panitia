@@ -256,12 +256,10 @@ class Dashboard extends CI_Controller {
         $no = 1;
         foreach ($list as $event) {
 
-        	if ($event->STATUS == 2) {
-        		$status = 'UPCOMING';
-        	} elseif ($event->STATUS == 1) {
-        		$status = 'NOW';
+        	if ($event->STATUS == 1) {
+        		$status = 'Terdaftar';
         	} else {
-        		$status = 'END';
+        		$status = 'Menunggu Konfirmasi';
         	}
 
             $row = array();

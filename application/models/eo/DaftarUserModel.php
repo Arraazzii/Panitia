@@ -3,10 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class DaftarUserModel extends CI_Model {
  
-    var $table = 'user_participant';
+    var $table = 'form_pendaftaran';
     var $column_order = array(null ,'nama','nohp','email','pekerjaan', 'jenis_kelamin', 'judul'); //set column field database for datatable orderable
     var $column_search = array('nama', 'nohp', 'email', 'judul'); //set column field database for datatable searchable just firstname , lastname , address are searchable
-    var $order = array('id_peserta' => 'desc'); // default order 
+    var $order = array('user_participant.id_peserta' => 'desc'); // default order 
  
     public function __construct()
     {
@@ -16,7 +16,23 @@ class DaftarUserModel extends CI_Model {
  
     private function _get_datatables_query()
     {
-        $this->db->join('form_minat', 'form_minat.ID_MINAT=user_participant.ID_MINAT', 'left');
+        $this->db->join('user_participant', 'user_participant.id_peserta=form_pendaftaran.id_peserta', 'left');
+        $this->db->join('form_event', 'form_event.kode_events=form_pendaftaran.kode_events', 'left');
+        $this->db->join('form_minat', 'form_minat.id_minat=user_participant.id_minat', 'left');
+
+        $select = [
+            'user_participant.NAMA',
+            'user_participant.NOHP',
+            'user_participant.EMAIL',
+            'user_participant.PEKERJAAN',
+            'user_participant.JENIS_KELAMIN',
+            'form_minat.JUDUL'
+        ];
+        $this->db->distinct();  
+
+        $this->db->select($select);
+
+        $this->db->where('form_event.created_by', $this->session->userdata('id_eo'));
         $this->db->from($this->table);
  
         $i = 0;
@@ -71,7 +87,23 @@ class DaftarUserModel extends CI_Model {
  
     public function count_all()
     {
-        $this->db->join('form_minat', 'form_minat.ID_MINAT=user_participant.ID_MINAT', 'left');
+        $this->db->join('user_participant', 'user_participant.id_peserta=form_pendaftaran.id_peserta', 'left');
+        $this->db->join('form_event', 'form_event.kode_events=form_pendaftaran.kode_events', 'left');
+        $this->db->join('form_minat', 'form_minat.id_minat=user_participant.id_minat', 'left');
+
+        $select = [
+            'user_participant.NAMA',
+            'user_participant.NOHP',
+            'user_participant.EMAIL',
+            'user_participant.PEKERJAAN',
+            'user_participant.JENIS_KELAMIN',
+            'form_minat.JUDUL'
+        ];
+        $this->db->distinct();  
+
+        $this->db->select($select);
+
+        $this->db->where('form_event.created_by', $this->session->userdata('id_eo'));
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }

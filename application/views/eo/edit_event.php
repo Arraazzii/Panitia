@@ -121,37 +121,39 @@
                             <label for="" class="col-sm-2 col-form-label">Status Event</label>
                             <div class="col-sm-6">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline1" value="FREE" name="status_event" class="custom-control-input" <?= ($detail->STATUS_EVENT == 'FREE')? 'checked=""':'' ?>>
+                                        <input type="radio" onclick="showHide()" id="customRadioInline1" value="FREE" name="status_event" class="custom-control-input" <?= ($detail->STATUS_EVENT == 'FREE')? 'checked=""':'' ?>>
                                         <label class="custom-control-label" for="customRadioInline1">Free</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline2" value="PAID" name="status_event" class="custom-control-input" <?= ($detail->STATUS_EVENT == 'PAID')? 'checked=""':'' ?>>
+                                        <input type="radio" onclick="showHide()" id="customRadioInline2" value="PAID" name="status_event" class="custom-control-input" <?= ($detail->STATUS_EVENT == 'PAID')? 'checked=""':'' ?>>
                                         <label class="custom-control-label" for="customRadioInline2">Berbayar</label>
                                     </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Harga</label>
-                            <div class="col-sm-6">
-                            <input name="harga" value="<?= $detail->HARGA ?>" id="rupiah" type="text" class="form-control" required />
+                        <div id="berbayar" style="display: none">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Harga</label>
+                                <div class="col-sm-6">
+                                <input name="harga" value="<?= $detail->HARGA ?>" id="rupiah" type="text" class="form-control" required />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Nama Bank</label>
-                            <div class="col-sm-6">
-                            <input name="nama_bank" value="<?= $detail->NAMA_BANK ?>" type="text" class="form-control">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Nama Bank</label>
+                                <div class="col-sm-6">
+                                <input name="nama_bank" value="<?= $detail->NAMA_BANK ?>" type="text" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Nama Rekening</label>
-                            <div class="col-sm-6">
-                            <input name="nama_rekening" value="<?= $detail->NAMA_REKENING ?>" type="text" class="form-control">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Nama Rekening</label>
+                                <div class="col-sm-6">
+                                <input name="nama_rekening" value="<?= $detail->NAMA_REKENING ?>" type="text" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">No Rekening</label>
-                            <div class="col-sm-6">
-                            <input name="no_rekening" value="<?= $detail->NOMOR_REKENING ?>" type="number" class="form-control" required />
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">No Rekening</label>
+                                <div class="col-sm-6">
+                                <input name="no_rekening" value="<?= $detail->NOMOR_REKENING ?>" type="number" class="form-control" required />
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -198,6 +200,15 @@
     <?php
         include 'global/_js.php';
     ?>
+
+    <!-- Id berbayar -->
+    <script type="text/javascript">
+        function showHide() {
+            var customRadioInline2 = document.getElementById("customRadioInline2");
+            var berbayar = document.getElementById("berbayar");
+            berbayar.style.display = customRadioInline2.checked ? "block" : "none";
+        }
+    </script>
 
     <!-- ckeditor -->
     <script type="text/javascript" src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>

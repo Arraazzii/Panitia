@@ -5,7 +5,6 @@
     <script src="<?= base_url('assets/desain/dist/js/bootstrap.min.js') ?>"></script>
 
     <script type="text/javascript" src="<?= base_url('assets/slick-master/slick/slick.min.js') ?>"></script>
-    
 
     <script>
         $(document).ready(function() {
@@ -22,15 +21,13 @@
                 });
 
                     // hide the menu when the mouse leaves the dropdown
-                $( ".navbar .dropdown-menu" ).mouseleave(function() {
+                $(".navbar .dropdown-menu").mouseleave(function() {
                     $(this).removeClass("show");  
                 });
             
                     // do something here
                 }	
             });  
-            
-            
 
         // document ready  
         });

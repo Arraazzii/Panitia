@@ -264,7 +264,7 @@ class Event extends CI_Controller {
     	);
         $query = $this->EventModel->nonAktifkan($kode_event, $data);
         if ($query) {
-        	redirect('event_organizer/events', 'refresh'); 
+        	redirect('detail_event/'.$kode_event, 'refresh'); 
         }
     }
 
@@ -275,7 +275,7 @@ class Event extends CI_Controller {
     	);
         $query = $this->EventModel->Aktifkan($kode_event, $data);
         if ($query) {
-        	redirect('event_organizer/events', 'refresh'); 
+        	redirect('detail_event/'.$kode_event, 'refresh'); 
         }
     }
 }

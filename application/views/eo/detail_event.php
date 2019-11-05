@@ -53,6 +53,16 @@
                     <a href="<?= site_url('daftar_peserta/'.$detail->KODE_EVENTS) ?>" class="btn btn-info btn-md"><i class="mdi mdi-eye"></i> Daftar Peserta</a>
                     <a href="<?= site_url('event_organizer/pembayaran/'.$detail->KODE_EVENTS) ?>" class="btn btn-success btn-md"><i class="mdi mdi-check"></i> Konfirmasi Pendaftaran</a>
                 </p> -->
+                <p>
+                    <h5>Status Event</h5>
+                    <?php if ($detail->STATUS == 2) : ?>
+                        <a class="btn btn-success btn-md" onclick="return confirm('Are You sure you want to Activate this event?');" href="<?= site_url('aktifkan_event/'.$detail->KODE_EVENTS) ?>">Aktifkan</a>
+                    <?php elseif($detail->STATUS == 1) : ?>
+                        <a class="btn btn-danger btn-md" onclick="return confirm('Are You sure you want to Non Activate this event?');" href="<?= site_url('nonaktifkan_event/'.$detail->KODE_EVENTS) ?>">Non Aktifkan</a>
+                    <?php elseif($detail->STATUS == 0) : ?>
+                        <button class="btn btn-light btn-md">Event Selesai</button>
+                    <?php endif; ?>
+                </p>
             </div>
             <div class="col-md-3 p-3">
                 <h4>Jadwal Pelaksanaan</h4>

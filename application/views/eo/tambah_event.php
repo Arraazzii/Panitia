@@ -121,37 +121,39 @@
                             <label for="" class="col-sm-2 col-form-label">Status Event</label>
                             <div class="col-sm-6">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline1" value="FREE" name="status_event" class="custom-control-input" checked>
+                                        <input type="radio" id="customRadioInline1" onclick="showHide()" value="FREE" name="status_event" class="custom-control-input" checked>
                                         <label class="custom-control-label" for="customRadioInline1">Free</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline2" value="PAID" name="status_event" class="custom-control-input">
+                                        <input type="radio" id="customRadioInline2" onclick="showHide()" value="PAID" name="status_event" class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioInline2">Berbayar</label>
                                     </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Harga</label>
-                            <div class="col-sm-6">
-                            <input name="harga" id="rupiah" type="text" class="form-control">
+                        <div id="berbayar" style="display: none;">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Harga</label>
+                                <div class="col-sm-6">
+                                <input name="harga" id="rupiah" type="text" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Nama Bank</label>
-                            <div class="col-sm-6">
-                            <input name="nama_bank" type="text" class="form-control">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Nama Bank</label>
+                                <div class="col-sm-6">
+                                <input name="nama_bank" type="text" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Nama Rekening</label>
-                            <div class="col-sm-6">
-                            <input name="nama_rekening" type="text" class="form-control">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Nama Rekening</label>
+                                <div class="col-sm-6">
+                                <input name="nama_rekening" type="text" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">No Rekening</label>
-                            <div class="col-sm-6">
-                            <input name="no_rekening" type="number" class="form-control">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">No Rekening</label>
+                                <div class="col-sm-6">
+                                <input name="no_rekening" type="number" class="form-control">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -206,6 +208,15 @@
         $(document).ready(function() {
             CKEDITOR.replace( 'editor1' );
         } );
+    </script>
+
+    <!-- Id berbayar -->
+    <script type="text/javascript">
+        function showHide() {
+            var customRadioInline2 = document.getElementById("customRadioInline2");
+            var berbayar = document.getElementById("berbayar");
+            berbayar.style.display = customRadioInline2.checked ? "block" : "none";
+        }
     </script>
 
     <!-- datepicker -->

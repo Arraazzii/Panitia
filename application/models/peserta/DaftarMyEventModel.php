@@ -18,7 +18,16 @@ class DaftarMyEventModel extends CI_Model {
     {
         $this->db->join('user_participant', 'user_participant.ID_PESERTA=form_pendaftaran.ID_PESERTA', 'left');
         $this->db->join('form_event', 'form_event.KODE_EVENTS=form_pendaftaran.KODE_EVENTS', 'left');
-        $this->db->where('form_pendaftaran.status', 1);
+
+        $select = [
+            'form_pendaftaran.KODE_EVENTS',
+            'form_event.JUDUL_ACARA',
+            'form_event.WAKTU_MULAI',
+            'form_event.WAKTU_AKHIR',
+            'form_event.LOKASI',
+            'form_pendaftaran.STATUS',
+        ];
+        $this->db->select($select);
 
         $this->db->where($this->table.'.id_peserta', $this->session->userdata('id_peserta'));
         $this->db->from($this->table);
@@ -77,7 +86,6 @@ class DaftarMyEventModel extends CI_Model {
     {
         $this->db->join('user_participant', 'user_participant.ID_PESERTA=form_pendaftaran.ID_PESERTA', 'left');
         $this->db->join('form_event', 'form_event.KODE_EVENTS=form_pendaftaran.KODE_EVENTS', 'left');
-        $this->db->where('form_pendaftaran.status', 1);
         
         $this->db->where($this->table.'.id_peserta', $this->session->userdata('id_peserta'));
         $this->db->from($this->table);
