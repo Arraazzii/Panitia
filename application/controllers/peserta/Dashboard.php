@@ -175,10 +175,10 @@ class Dashboard extends CI_Controller {
 
 	    if ($queryBayar) {
 		   	$this->session->set_flashdata('success', 'Berhasil Mendaftar, Silahkan Tunggu Konfirmasi dari Panitia.');
-		    redirect(site_url('detail_event/'.$this->input->post('kode_events')), 'refresh');
+		    redirect(site_url('peserta/myevent'), 'refresh');
 	    } else {
 		   	$this->session->set_flashdata('danger', 'Gagal Mendaftar.');
-		    redirect(site_url('detail_event/'.$this->input->post('kode_events')),'refresh');
+		    redirect(site_url('pembayaran/'.$this->input->post('kode_events')),'refresh');
 	    }
     }
 
