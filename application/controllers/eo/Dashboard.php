@@ -380,6 +380,15 @@ class Dashboard extends CI_Controller {
     	$nama_event = $this->DashboardModel->CheckNamaEvents($id_pendaftaran);
     	// get nama peserta from form pendaftaran
     	$nama = $this->DashboardModel->CheckNama($id_pendaftaran);
+        // update pembayaran
+        $query = $this->DashboardModel->UpdateDaftar($id_pendaftaran, $daftar);
+        if ($query) {
+            $this->DashboardModel->UpdateBayar($id_pembayaran, $bayar);$this->session->set_flashdata('success', 'Berhasil Mengirim Konfirmasi kepada peserta.');
+            redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
+        } else {
+             $this->session->set_flashdata('danger', 'Gagal Mengirim konfirmasi Peserta.');
+            redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
+        }
 
 		// $config = array();
 		// $config['protocol'] = 'smtp';
@@ -396,47 +405,47 @@ class Dashboard extends CI_Controller {
 		// $this->email->initialize($config);
 
 		//konfigurasi pengiriman
-		$this->load->library('PHPMailer');
-        $this->load->library('SMTP');
+		// $this->load->library('PHPMailer');
+  //       $this->load->library('SMTP');
 
-        $email_admin = 'panitiaid92@gmail.com';
-        $nama_admin = 'noreply-Panitia';
-        $password_admin = 'p4n1t141d';
+  //       $email_admin = 'panitiaid92@gmail.com';
+  //       $nama_admin = 'noreply-Panitia';
+  //       $password_admin = 'p4n1t141d';
 
-        $mail = new PHPMailer();
-        $mail->isSMTP();  
-        $mail->SMTPKeepAlive = true;
-        $mail->Charset  = 'UTF-8';
-        $mail->IsHTML(true);
-       	// $mail->SMTPDebug = 1;
-        $mail->SMTPAuth = true;
-        $mail->Host = 'smtp.gmail.com'; 
-        $mail->Port = 587;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Username = $email_admin;
-        $mail->Password = $password_admin;
-        $mail->Mailer   = 'smtp';
-        $mail->WordWrap = 100;
+  //       $mail = new PHPMailer();
+  //       $mail->isSMTP();  
+  //       $mail->SMTPKeepAlive = true;
+  //       $mail->Charset  = 'UTF-8';
+  //       $mail->IsHTML(true);
+  //      	// $mail->SMTPDebug = 1;
+  //       $mail->SMTPAuth = true;
+  //       $mail->Host = 'smtp.gmail.com'; 
+  //       $mail->Port = 587;
+  //       $mail->SMTPSecure = 'ssl';
+  //       $mail->Username = $email_admin;
+  //       $mail->Password = $password_admin;
+  //       $mail->Mailer   = 'smtp';
+  //       $mail->WordWrap = 100;
 
-		$mail->setFrom($email_admin);
-        $mail->FromName = $nama_admin;
-        $mail->addAddress($email);
-        $mail->Subject = 'Konfirmasi Pendaftaran Event '.$nama_event;
-		$message = "terima kasih telah mendaftar di event Panitia.ID, silahkan menunjukkan email ini kepada panitia untuk melakukan daftar ulang event.\n\n Nama Event : ". $kode_event ."\n Nama Peserta: ". $nama ." \n\n semoga event ini dapat bermanfaat dan berguna untuk kita semua.\n\n\n Best Regards,\nPanitia.ID";
-		$mail->Body = $message;
-		if ($mail->send()) {
-	    	// update status pembayaran
-	    	$this->DashboardModel->UpdateBayar($id_pembayaran, $bayar);
-	    	// update status pendaftaran
-	    	$this->DashboardModel->UpdateDaftar($id_pendaftaran, $daftar);
-		   	$this->session->set_flashdata('success', 'Berhasil Mengirim Email kepada peserta.');
-		    redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
-		    // echo $this->email->print_debugger();
-		} else {
-		   	$this->session->set_flashdata('success', 'Gagal Mengirim Email ke Peserta.');
-		    redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
-		    // echo $this->email->print_debugger();
-		}
+		// $mail->setFrom($email_admin);
+  //       $mail->FromName = $nama_admin;
+  //       $mail->addAddress($email);
+  //       $mail->Subject = 'Konfirmasi Pendaftaran Event '.$nama_event;
+		// $message = "terima kasih telah mendaftar di event Panitia.ID, silahkan menunjukkan email ini kepada panitia untuk melakukan daftar ulang event.\n\n Nama Event : ". $kode_event ."\n Nama Peserta: ". $nama ." \n\n semoga event ini dapat bermanfaat dan berguna untuk kita semua.\n\n\n Best Regards,\nPanitia.ID";
+		// $mail->Body = $message;
+		// if ($mail->send()) {
+	 //    	// update status pembayaran
+	 //    	$this->DashboardModel->UpdateBayar($id_pembayaran, $bayar);
+	 //    	// update status pendaftaran
+	 //    	$this->DashboardModel->UpdateDaftar($id_pendaftaran, $daftar);
+		//    	$this->session->set_flashdata('success', 'Berhasil Mengirim Email kepada peserta.');
+		//     redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
+		//     // echo $this->email->print_debugger();
+		// } else {
+		//    	$this->session->set_flashdata('success', 'Gagal Mengirim Email ke Peserta.');
+		//     redirect(site_url('event_organizer/pembayaran/'.$kode_event), 'refresh');
+		//     // echo $this->email->print_debugger();
+		// }
     }
 
     public function User()

@@ -83,6 +83,7 @@ class DashboardModel extends CI_Model {
 	{
 		$this->db->where('id_pendaftaran', $id_pendaftaran);
 		$this->db->update('form_pendaftaran', $daftar);
+		return TRUE;
 	}
 
 	public function CheckKodeEvents($id_pendaftaran)

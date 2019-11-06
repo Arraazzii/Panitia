@@ -71,7 +71,7 @@
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label">No Rekening</label>
                             <div class="col-sm-6">
-                            <input name="no_rekening" type="text" class="form-control" required />
+                            <input name="no_rekening" type="number" class="form-control" required />
                             </div>
                         </div>
                         <div class="form-group row">
