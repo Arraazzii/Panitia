@@ -146,38 +146,9 @@
         include 'global/_js.php';
     ?>
 
-    <!-- Modal Bukti Transfer -->
-    <script type="text/javascript">
-        $(document).on('click', '.detail',function(){
-            var url = "<?= site_url('assets/img/bukti/') ?>";
-            var images = $(this).data('images');
-            var id = $(this).data('id');
-            var uri = "<?= site_url('pembayaran/clicked_list') ?>";
-            var path = url+images;
-            var html = '';
-             $.ajax({
-                url: uri,
-                type: 'POST',
-                data: {id: id},
-                success: function (result) {
-                    if(result){
-                        var data  = JSON.parse(result);
-                        console.log(data);
-                        
-                        $('#append-list').html(html);
-                        $('#imagepreview').attr('src', path);
-                        $('#imagemodal').modal('show');
-                    }
-                }
-            });        
-        });
-    </script>
-
     <!-- Data Tables -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
     <script>
         var table;
         var kode_events = $('#kode_events').val();
@@ -210,6 +181,33 @@
          
             });
          
+        });
+    </script>
+
+    <!-- Modal Bukti Transfer -->
+    <script type="text/javascript">
+        $(document).on('click', '.detail',function(){
+            var url = "<?= site_url('assets/img/bukti/') ?>";
+            var images = $(this).data('images');
+            var id = $(this).data('id');
+            var uri = "<?= site_url('pembayaran/clicked_list') ?>";
+            var path = url+images;
+            var html = '';
+             $.ajax({
+                url: uri,
+                type: 'POST',
+                data: {id: id},
+                success: function (result) {
+                    if(result){
+                        var data  = JSON.parse(result);
+                        console.log(data);
+                        
+                        $('#append-list').html(html);
+                        $('#imagepreview').attr('src', path);
+                        $('#imagemodal').modal('show');
+                    }
+                }
+            });        
         });
     </script>
 

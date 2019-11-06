@@ -371,15 +371,15 @@ class Dashboard extends CI_Controller {
     	);
 
     	//get email from user participant
-    	$email = $this->DashboardModel->CheckEmail($id_pembayaran);
+    	// $email = $this->DashboardModel->CheckEmail($id_pembayaran);
     	// get id pendaftaran from from pendaftaran
     	$id_pendaftaran = $this->DashboardModel->CheckIdPendaftaran($id_pembayaran);
     	// get kode event from form pendaftaran
     	$kode_event = $this->DashboardModel->CheckKodeEvents($id_pendaftaran);
     	// get kode event from form pendaftaran
-    	$nama_event = $this->DashboardModel->CheckNamaEvents($id_pendaftaran);
+    	// $nama_event = $this->DashboardModel->CheckNamaEvents($id_pendaftaran);
     	// get nama peserta from form pendaftaran
-    	$nama = $this->DashboardModel->CheckNama($id_pendaftaran);
+    	// $nama = $this->DashboardModel->CheckNama($id_pendaftaran);
         // update pembayaran
         $query = $this->DashboardModel->UpdateDaftar($id_pendaftaran, $daftar);
         if ($query) {
