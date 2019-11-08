@@ -558,7 +558,7 @@ class landingPage extends CI_Controller {
 
 			$checkPw = $this->LandingPageModel->CheckPw($pw_lama, $id);
 			if ($checkPw) {
-				$updatePw = $this->LandingPageModel->UpdatePw($data, $id_peserta);
+				$updatePw = $this->LandingPageModel->UpdatePw($data, $id);
 				$this->session->set_flashdata('success', 'Password anda telah diperbarui.');
 				redirect(site_url('peserta/profile'),'refresh');
 			} else {
