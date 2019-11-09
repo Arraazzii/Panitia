@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DaftarPembayaranModel extends CI_Model {
  
     var $table = 'form_pendaftaran';
-    var $column_order = array(null ,'nama','nama_bank','no_rekening','nama_rekening', 'harga', 'bukti_transfer', null); //set column field database for datatable orderable
+    var $column_order = array(null ,'nama','nama_bank','no_rekening','nama_rekening', null, null); //set column field database for datatable orderable
     var $column_search = array('nama', 'no_rekening', 'nama_bank'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $order = array('form_pendaftaran.id_pendaftaran' => 'desc'); // default order 
  

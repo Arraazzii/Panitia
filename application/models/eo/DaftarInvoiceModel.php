@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DaftarInvoiceModel extends CI_Model {
  
     var $table = 'form_invoice';
-    var $column_order = array(null , 'kode_events', 'nilai_invoice'); //set column field database for datatable orderable
+    var $column_order = array(null , 'kode_events', 'nilai_invoice','nama_bank','no_rekening','nama_rekening', null,'created_date', null); //set column field database for datatable orderable
     var $column_search = array('kode_events', 'no_rekening'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $order = array('id_invoice' => 'desc'); // default order 
  

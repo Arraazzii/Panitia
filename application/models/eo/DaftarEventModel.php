@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DaftarEventModel extends CI_Model {
  
     var $table = 'form_event';
-    var $column_order = array(null ,'kode_events','judul_acara','status_event','lokasi'); //set column field database for datatable orderable
+    var $column_order = array(null ,'kode_events','judul_acara','lokasi', 'status_event',null,null); //set column field database for datatable orderable
     var $column_search = array('kode_events', 'judul_acara', 'status_event', 'lokasi'); //set column field database for datatable searchable just firstname , lastname , address are searchable
     var $order = array('kode_events' => 'desc'); // default order 
  
@@ -24,6 +24,7 @@ class DaftarEventModel extends CI_Model {
             $this->db->where($this->table.'.created_by', $this->session->userdata('id_peserta'));
         }
         
+        $this->db->where_not_in('form_event.status', 2);
         $this->db->from($this->table);
  
         $i = 0;
@@ -85,7 +86,8 @@ class DaftarEventModel extends CI_Model {
         if ($this->session->userdata('id_peserta')) {
             $this->db->where($this->table.'.created_by', $this->session->userdata('id_peserta'));
         }
-
+        
+        $this->db->where_not_in('form_event.status', 2);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
